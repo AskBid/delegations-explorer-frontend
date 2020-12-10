@@ -1,4 +1,48 @@
 body {
 	background-color: #9bd;
 	font-family: Helvetica, GillSans;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	height: 100vh;
+	display: flex;
+	box-sizing: border-box;
+	/* Direction of the items, can be row or column */
+	flex-direction: column;
+}
+
+header {
+	/*background-color: red;*/
+	/*margin-left: auto;
+  margin-right: auto;*/
+  text-align: center;
+	border: 1px solid;
+	flex: 0.2;
+} 
+
+footer {
+	/*background-color: red;*/
+	border: 1px solid;
+	height: 30px;
+}
+
+main {
+	/*background-color: red;*/
+	border: 1px solid;
+	flex: 0.8;
+}
+
+main > .container {
+	border: 1px solid;
+	display: grid;  
+	width: 50%;
+	margin: 0 auto;
+  grid-template-columns: minmax(100px, 0.2fr) minmax(500px, 0.4fr);  
+  grid-template-rows: auto; 
+}
+
+main > .container > div {
+	border: 1px solid;
 }
