@@ -5,44 +5,52 @@ body {
 	padding: 0;
 }
 
-.wrapper {
-	height: 100vh;
-	display: flex;
-	box-sizing: border-box;
-	/* Direction of the items, can be row or column */
-	flex-direction: column;
+.tabs_container {
+	border: 1px solid;
+	width: 400px;
+	min-height: 300px;
+}
+
+.chart_container {
+	border: 1px solid;
+	width: 600px;
+	min-height: 300px;
 }
 
 header {
-	/*background-color: red;*/
-	/*margin-left: auto;
-  margin-right: auto;*/
+	color: #333;
   text-align: center;
-	border: 1px solid;
 	flex: 0.2;
+	border: 1px solid;
 } 
 
-footer {
-	/*background-color: red;*/
+main {
 	border: 1px solid;
+	display: flex;
+	justify-content: center;
+}
+
+footer {
+	background-color: black;
+	color: #999;
+	text-align: center;
 	height: 30px;
 }
 
-main {
-	/*background-color: red;*/
-	border: 1px solid;
-	flex: 0.8;
-}
 
 main > .container {
 	border: 1px solid;
-	display: grid;  
-	width: 50%;
-	margin: 0 auto;
+	display: flex;  
+	width: 0.7fr;
+	/*flex: auto;*/
+	flex-wrap: wrap;
+	/*width: 50%;*/
+	/*	margin: 0 auto;
   grid-template-columns: minmax(100px, 0.2fr) minmax(500px, 0.4fr);  
-  grid-template-rows: auto; 
+  grid-template-rows: auto; */
 }
 
 main > .container > div {
 	border: 1px solid;
+	/*flex: auto;*/
 }
