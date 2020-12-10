@@ -3,39 +3,71 @@ body {
 	font-family: Helvetica, GillSans;
 	margin: 0;
 	padding: 0;
-}
-
-.tabs_container {
-	border: 1px solid;
-	width: 400px;
-	min-height: 300px;
-}
-
-.chart_container {
-	border: 1px solid;
-	width: 600px;
-	min-height: 600px;
-}
-
-header {
-	color: #333;
-  text-align: center;
-	flex: 0.2;
-	border: 1px solid;
-} 
-
-main {
-	flex: 0.8;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .container {
-	border: 1px solid;
 	display: flex;
+	height: 100%;
+	flex: 1;
 	justify-content: center;
 	align-items: stretch;
 	align-content: stretch;
 	flex-wrap: wrap;
 }
+
+	.chart_container {
+		background-color: green;
+		width: 300px;
+		min-height: 300px;
+		flex: 1 1 500px;
+	}
+
+	.delegations_container {
+		min-height: 300px;
+		display: flex;
+		flex-direction: row;
+		flex: 1;
+	}
+
+		.histo_container {
+			background-color: grey;
+			width: 200px;
+			min-height: 400px;
+		}
+
+		.tabs_column_container {
+			background-color: orange;
+			width: 300px;	
+			display: flex;
+			flex-wrap: wrap;
+			flex-grow: 1;
+			justify-content: flex-start;
+			align-items: flex-start;
+			align-content: flex-start;
+		}
+
+			.tabs_container {
+				background-color: white;
+				width: 300px;
+				height: 50px;
+				margin: 10px 10px 0px 10px;
+			}
+
+
+header {
+	color: #333;
+  text-align: center;
+	flex: 0.2;
+} 
+
+main {
+	flex: 0.8;
+	flex-grow: 1;
+}
+
 
 .tab {
 	background-color: yellow;
