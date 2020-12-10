@@ -14,7 +14,7 @@ body {
 .chart_container {
 	border: 1px solid;
 	width: 600px;
-	min-height: 300px;
+	min-height: 600px;
 }
 
 header {
@@ -25,9 +25,25 @@ header {
 } 
 
 main {
+	flex: 0.8;
+}
+
+.container {
 	border: 1px solid;
 	display: flex;
 	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+	flex-wrap: wrap;
+}
+
+.tab {
+	background-color: yellow;
+	margin: 5px;
+	border: 1px solid;
+	width: 300px;
+	min-height: 80px;
+	border-radius: 7px;
 }
 
 footer {
@@ -35,22 +51,4 @@ footer {
 	color: #999;
 	text-align: center;
 	height: 30px;
-}
-
-
-main > .container {
-	border: 1px solid;
-	display: flex;  
-	width: 0.7fr;
-	/*flex: auto;*/
-	flex-wrap: wrap;
-	/*width: 50%;*/
-	/*	margin: 0 auto;
-  grid-template-columns: minmax(100px, 0.2fr) minmax(500px, 0.4fr);  
-  grid-template-rows: auto; */
-}
-
-main > .container > div {
-	border: 1px solid;
-	/*flex: auto;*/
 }
