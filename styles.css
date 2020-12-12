@@ -1,6 +1,7 @@
 body {
 	background-color: #9bd;
-	font-family: Helvetica, GillSans;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
 	margin: 0;
 	padding: 0;
 	height: 100vh;
@@ -40,9 +41,7 @@ header > .container > .container {
 	padding: 4px 10px 4px 0px;
 	text-align: right;
 	border-radius: 0px 6px 6px 0px;
-	font-family: 'Roboto', sans-serif;
   color: #e4e2ff;
-  font-size: 13px;
 }
 
 #id {
@@ -69,7 +68,7 @@ header > .container > .container {
 #epoch_dash > .container{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
 	align-content: center;
 	align-items: center;
 	/*border: 1px solid;*/
@@ -90,11 +89,14 @@ header > .container > .container {
 
 #prev_epoch, #next_epoch {
 	font-size: 20px;
+	color: white;
+	line-height: 50px;
+	text-align: center;
 	flex: 0 1 70px;
 	height:50px;
+	margin: 0px 10px 0px 0px;
 	background-color: blue;
-	border-radius:6px;
-	/*border-radius: 5px;*/
+	border-radius: 6px;
 }
 
 #prev_epoch:hover, #next_epoch:hover {
@@ -102,7 +104,9 @@ header > .container > .container {
 }
 
 #epoch {
+	text-align: right;
 	font-size: 30px;
+	margin: 0px 20px;
 	flex: 0 1 200px;
 }
 
@@ -147,7 +151,7 @@ main > .container > .container {
 .chart_container {
 	background-color: rgba(150,150,150,0.11);
 	min-height: 400px;
-	flex: 4 1 400px;
+	flex: 3 1 400px;
 }
 
 .histo_container {
