@@ -23,7 +23,7 @@ body {
 	flex: 1;
 }
 
-.delegations_container {
+main > .container > .container {
 	min-height: 300px;
 	display: flex;
 	flex-direction: row;
