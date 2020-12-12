@@ -123,11 +123,6 @@ header > .container > .container {
 
 /* <MAIN */
 
-svg {
-	padding: 0px;
-	margin: 0px;
-}
-
 main > .container {
 	display: flex;
 	height: 100%;
@@ -151,7 +146,8 @@ main > .container > .container {
 .chart_container {
 	background-color: rgba(150,150,150,0.11);
 	min-height: 400px;
-	flex: 3 1 400px;
+	flex: 2 0 200px;
+	/*border: 1px solid;*/
 }
 
 .histo_container {
@@ -159,17 +155,37 @@ main > .container > .container {
 	/*min-height: 500px;*/
 	width: 100px;
 	flex: 0 1 200px;
+	/*border: 1px solid;*/
 }
 
 .tabs_container {
 	/*background-color: orange;*/
 	/*width: 300px;	*/
+	margin: 10px 0px 0px 0px;
 	display: flex;
 	flex-wrap: wrap;
 	flex: 5 0;
 	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
+	/*border: 1px solid;*/
+}
+
+.insert {
+	width: 290px;
+	margin: 6px 0px 0px 0px;
+	display: flex;
+}
+
+.insert > input {
+	width: 100%;
+	margin: 0px;
+}
+
+.button {
+	min-height:100%;
+	width: 25px;
+	border: 1px solid;
 }
 
 .tab {
