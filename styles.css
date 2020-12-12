@@ -36,7 +36,7 @@ body {
 .chart_container {
 	background-color: green;
 	min-height: 300px;
-	flex: 1 0 500px;
+	flex: 1 1 500px;
 }
 
 .tabs_column_container {
@@ -44,7 +44,7 @@ body {
 	/*width: 300px;	*/
 	display: flex;
 	flex-wrap: wrap;
-	flex: 0.5;
+	flex: 1;
 	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
@@ -53,23 +53,28 @@ body {
 .tabs_container {
 	background-color: white;
 	margin: 10px 10px 0px 10px;
+	border: 1px solid;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 }
 
 .tab {
-	background-color: yellow;
+	background-color: white;
 	margin: 5px;
-	border: 1px solid;
+	padding: 5px;
 	width: 200px;
-	min-height: 80px;
+	border: 1px solid;
 	border-radius: 7px;
 }
 
 .tab_small {
-	background-color: yellow;
+	background-color: white;
 	margin: 5px;
-	border: 1px solid;
 	width: 180px;
-	min-height: 60px;
+	padding: 5px;
+	border: 1px solid;
 	border-radius: 7px;
 }
 
