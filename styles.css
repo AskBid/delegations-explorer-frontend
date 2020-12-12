@@ -11,51 +11,67 @@ body {
 .container {
 	display: flex;
 	height: 100%;
-	flex: 1;
 	justify-content: center;
 	align-items: stretch;
 	align-content: stretch;
-	flex-wrap: wrap;
 }
 
-	.chart_container {
-		background-color: green;
-		width: 300px;
-		min-height: 300px;
-		flex: 1 1 500px;
-	}
+.histo_container {
+	background-color: grey;
+	width: 200px;
+	min-height: 400px;
+	flex: 1;
+}
 
-	.delegations_container {
-		min-height: 300px;
-		display: flex;
-		flex-direction: row;
-		flex: 1;
-	}
+.delegations_container {
+	min-height: 300px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: 3;
+	align-content: stretch;
+	justify-content: center;
+}
 
-		.histo_container {
-			background-color: grey;
-			width: 200px;
-			min-height: 400px;
-		}
+.chart_container {
+	background-color: green;
+	min-height: 300px;
+	flex: 1 0 500px;
+}
 
-		.tabs_column_container {
-			background-color: orange;
-			width: 300px;	
-			display: flex;
-			flex-wrap: wrap;
-			flex-grow: 1;
-			justify-content: flex-start;
-			align-items: flex-start;
-			align-content: flex-start;
-		}
+.tabs_column_container {
+	background-color: orange;
+	/*width: 300px;	*/
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0.5;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+}
 
-			.tabs_container {
-				background-color: white;
-				width: 300px;
-				height: 50px;
-				margin: 10px 10px 0px 10px;
-			}
+.tabs_container {
+	background-color: white;
+	margin: 10px 10px 0px 10px;
+}
 
+.tab {
+	background-color: yellow;
+	margin: 5px;
+	border: 1px solid;
+	width: 200px;
+	min-height: 80px;
+	border-radius: 7px;
+}
+
+.tab_small {
+	background-color: yellow;
+	margin: 5px;
+	border: 1px solid;
+	width: 180px;
+	min-height: 60px;
+	border-radius: 7px;
+}
 
 header {
 	color: #333;
@@ -66,16 +82,6 @@ header {
 main {
 	flex: 0.8;
 	flex-grow: 1;
-}
-
-
-.tab {
-	background-color: yellow;
-	margin: 5px;
-	border: 1px solid;
-	width: 300px;
-	min-height: 80px;
-	border-radius: 7px;
 }
 
 footer {
