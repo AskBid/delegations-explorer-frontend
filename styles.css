@@ -20,13 +20,29 @@ header > .container {
 
 header > .container > .container {
 	display: flex;
-	padding: 5px;
+	margin: 5px 0px 5px 0px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 	/*border: 1px solid #88a;*/
 	/*flex: 0 0 30px;*/
 }
 
 #logo {
-	flex: 6;
+	flex: 6 0 300px;
+	/*border: 1px solid;*/
+}
+
+#logo > div {
+	width: 230px;
+	background-color: black;
+	margin: 6px 6px 6px 0px;
+	padding: 4px 10px 4px 0px;
+	text-align: right;
+	border-radius: 0px 6px 6px 0px;
+	font-family: 'Roboto', sans-serif;
+  color: #e4e2ff;
+  font-size: 13px;
 }
 
 #id {
