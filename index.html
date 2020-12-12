@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Cardano Rewards Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
 
@@ -11,16 +12,19 @@
 			<div class='container'>
 				<div class='container'>
 					<div id='logo'>Black [ SWAN ] Pool</div>
-					<div id='login'>login</div>
+					<div id='login'>
+						<input type='textfield' placeholder='username'><br>
+						<input type='textfield' placeholder='password'>
+					</div>
 					<div id='donate'>Donate&hearts;</div>
 				</div>
-				<div class='container'>
+				<div id='epoch_dash'>
 					<div class='container'>
-						<div id='prev_epoch'><</div>
+						<div id='prev_epoch'></div>
 						<div id='epoch'>epoch 232</div>
-						<div id='next_epoch'>></div>
+						<div id='next_epoch'></div>
 					</div>
-					<div class='container'>
+					<div class='values_container'>
 						<div class='value'>Tot.Delegations</div>
 						<div class='value'>Tot.Rewards</div>
 						<div class='value'>Rewarded Pools</div>
@@ -31,8 +35,8 @@
 		</header>
 		<main>
     	<div class='container'>
-    		<div class='histo_container'></div>
     		<div class='container'>
+    			<div class='histo_container'></div>
     			<div class='tabs_container'>
 						<div class='tab'>
     					<div class='sub_tab'>
@@ -45,7 +49,7 @@
     						<b>DIGI</b> <br>rewards: 400₳
     					</div>
     				</div> 
-						<div class='tab'>
+						<!-- <div class='tab'>
     					<div class='sub_tab'>
     						<b>SWAN</b> <br> delegated:80,000₳ <br> rewards: 100₳</div>
     					<div class='sub_tab'>
@@ -54,9 +58,13 @@
     					<div class='sub_tab'>
     						<b>DIGI</b> <br>rewards: 220₳
     					</div>
-    				</div>
+    				</div> -->
     			</div>
-    			<div class='chart_container'></div>
+    		</div>
+    		<div class='chart_container'>
+  				<!-- <svg width="500px" height="500px" style="background-color:rgba(150,200,250,0.5)">
+  					<circle cx="250" cy="250" r="200" stroke="#58d" stroke-width="3" fill="rgba(200,200,250,0.5)" /> 
+  				</svg> -->
     		</div>
     	</div>
 		</main>
