@@ -39,14 +39,14 @@ header > .container > .container {
 }
 
 #epoch_dash {
+	background-color: rgba(200,200,200,0.5);
 	display: flex;
+	padding: 5px;
 	/*border: 1px solid #88a;*/
 	flex-direction: row;
 	flex: 1 0;
 	flex-wrap: wrap;
 	justify-content: center;
-/*	align-content: center;
-	align-items: center;*/
 	text-align: center;	
 }
 
@@ -56,11 +56,12 @@ header > .container > .container {
 	justify-content: space-around;
 	align-content: center;
 	align-items: center;
-	border: 1px solid;
+	/*border: 1px solid;*/
 	flex: 3 0 300px;
 }
 
 .values_container {
+	margin: 0px 0px 0px 30px;
 	flex: 2 0 300px;
 	display: flex;
 	flex-wrap: wrap;
@@ -68,7 +69,7 @@ header > .container > .container {
 	justify-content: space-around;
 	align-content: stretch;
 	align-items: stretch;
-	border: 1px solid;
+	/*border: 1px solid;*/
 }
 
 #prev_epoch, #next_epoch {
@@ -76,7 +77,8 @@ header > .container > .container {
 	flex: 0 1 70px;
 	height:50px;
 	background-color: blue;
-	border-radius: 5px;
+	border-radius:6px;
+	/*border-radius: 5px;*/
 }
 
 #prev_epoch:hover, #next_epoch:hover {
@@ -89,9 +91,12 @@ header > .container > .container {
 }
 
 .value {	
-	min-height: 60px;
-	flex: 1 0 100px;
-	border: 1px solid;
+	margin: 5px;
+	/*min-height: 30px;*/
+	flex: 1 0 250px;
+	text-align: left;
+	vertical-align: center;
+	/*border: 1px solid;*/
 }
 
 /* HEADER> */
