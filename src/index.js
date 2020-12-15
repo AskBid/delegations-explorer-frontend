@@ -4,21 +4,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+class User {
+	constructor(username, password){
+		this.username = username;
+		this.password = password
+	}
+
+	post(){
+		fetch(`${BACKEND_URL}/users`,{
+	    method:'POST',
+	    headers: {
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+	    },
+	    body: JSON.stringify(this)
+	  })
+	  .then(resp=>resp.json())
+	}
+}
+
 
 function login() {
-	fetch(`${BACKEND_URL}/users`,{
-    method:'POST',
-    headers: {
-      "Content-Type":"application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(json)
-  })
-  .then(resp=>resp.json())
-
+	
 	hideLoginFields()
 	switchLoginButton()
 }
+
+
 
 function hideLoginFields() {
 	inputs = document.getElementById('login_fields').getElementsByTagName('input');
