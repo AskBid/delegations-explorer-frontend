@@ -74,7 +74,6 @@ header > .container > .container {
 	align-items: center;
 	/*border: 1px solid;*/
 	flex: 2 0 300px;
-	max-height: 80px;
 }
 
 .values_container {
@@ -249,7 +248,7 @@ button:active {
 }
 
 
-.login_button {
+.button {
 	border-radius: 5px;
 	margin: 0px 4px;
 	padding: 0px 4px;
@@ -257,6 +256,10 @@ button:active {
 	color: white;
 	cursor:pointer;
 	width: 60px;
+}
+
+#logout {
+	display: none;
 }
 
 .epoch_button {
@@ -296,21 +299,20 @@ button:active {
 	flex-direction: row;
 }
 
-.button {
+.button_small {
 	min-height:100%;
-	background-color: #444;
 	border-radius: 5px;
-	border: none;
 	width: 35px;
 	color: white;
 	line-height: 15px;
 	text-align: center;
 	margin: 0px 4px 0px 4px;
 	padding: 0px;
+	cursor:pointer;
 }
 
 .random {
-	background-color:  #9bd;
+	background-color: rgba(250, 250, 250, 0);
 	margin: 0px 0px 0px 0px;
 	border: 1px solid black;
 	padding: 0px;
