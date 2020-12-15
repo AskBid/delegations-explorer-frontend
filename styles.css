@@ -1,5 +1,6 @@
 body {
-	background-color: #9bd;
+	/*background-color: #9bd;*/
+	background-color: #eee;
 	font-family: 'Roboto', sans-serif;
 	font-size: 13px;
 	margin: 0;
@@ -30,12 +31,12 @@ header > .container > .container {
 }
 
 #logo {
-	flex: 6 0 300px;
+	flex: 6 0 200px;
 	/*border: 1px solid;*/
 }
 
 #logo > div {
-	width: 230px;
+	width: 180px;
 	background-color: black;
 	margin: 6px 6px 6px 0px;
 	padding: 4px 10px 4px 0px;
@@ -72,7 +73,8 @@ header > .container > .container {
 	align-content: center;
 	align-items: center;
 	/*border: 1px solid;*/
-	flex: 3 0 300px;
+	flex: 2 0 300px;
+	max-height: 80px;
 }
 
 .values_container {
@@ -95,7 +97,6 @@ header > .container > .container {
 	flex: 0 1 70px;
 	height:50px;
 	margin: 0px 10px 0px 0px;
-	background-color: blue;
 	border-radius: 6px;
 }
 
@@ -113,9 +114,12 @@ header > .container > .container {
 .value {	
 	margin: 5px;
 	/*min-height: 30px;*/
-	flex: 1 0 250px;
-	text-align: left;
+	flex: 1 0 150px;
+	text-align: center;
+	padding: 3px;
 	vertical-align: center;
+	border-radius: 5px;
+	background-color: rgba(160,160,180,0.4);
 	/*border: 1px solid;*/
 }
 
@@ -220,30 +224,32 @@ main > .container > .container {
 #login_area {
 	display: flex;
 	flex-wrap: wrap;
+	align-content: stretch;
+	min-height:45px;
 }
 
 button {
 	font-family: 'Roboto', sans-serif;
 	font-size: 13px;
 	min-height: 30px;
-	outline: none
+	outline: none;
+	border: 1px solid darkblue;
+	background-color: #008CBA;
 }
 
 button:hover {
-	background-color: orange;
+	background-color: darkorange;
 }
 
 button:focus {
 }
 
 button:active {
-	background-color: grey;
+	background-color:#FF6347;
 }
 
 
 .login_button {
-	border: none;
-	background-color: blue;
 	border-radius: 5px;
 	margin: 0px 4px;
 	padding: 0px 4px;
@@ -269,9 +275,20 @@ button:active {
 	/*width: 60px;*/
 }
 
+#donate:hover {
+	background-color: lightblue;
+}
+
 #signup {
 	border: none;
 	background-color: #9bd;;
+}
+
+#login_fields {
+	display: flex;
+	min-height:40px;
+	flex-direction: column; 
+	justify-content: center;
 }
 
 .button {
