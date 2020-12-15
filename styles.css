@@ -237,14 +237,15 @@ button {
 }
 
 button:hover {
-	background-color: darkorange;
+	background-color: #40bCfA;
 }
 
 button:focus {
+	border: 1px solid #777;
 }
 
 button:active {
-	background-color:#FF6347;
+	background-color: #209CdA;
 }
 
 
