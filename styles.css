@@ -291,6 +291,11 @@ button:active {
 	justify-content: center;
 }
 
+#login_form {
+	display: flex;
+	flex-direction: row;
+}
+
 .button {
 	min-height:100%;
 	background-color: #444;
