@@ -283,6 +283,13 @@ button:active {
 	background-color: lightblue;
 }
 
+#name {
+	font-size: 20px;
+	background-color: rgba(250,250,250,0);
+	border: none;
+	display: none;
+}
+
 #signup {
 	border: none;
 	background-color: #9bd;;

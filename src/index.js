@@ -25,7 +25,10 @@ class User {
 	  .then(resp=>resp.json())
 	  .then(obj=> {	
 	  	console.log(obj)
-	  	return obj
+	  	if (obj) {
+				switchLoginLogout(obj.username)
+			}
+			else {displayLoginError()}
 	  })
 	}
 }
@@ -42,10 +45,6 @@ function login() {
 	password = document.getElementById('password').value;
 	user = new User(username, password)
 	userObj = user.post()
-	if (userObj) {
-		switchLoginLogout(userObj.username)
-	}
-	else {displayLoginError()}
 }
 
 function switchLoginLogout(username) {
