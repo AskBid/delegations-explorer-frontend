@@ -50,12 +50,14 @@ function login() {
 function switchLoginLogout(username) {
 	form = document.getElementById('login_form');
 	logout = document.getElementById('logout');
+	username_label = document.getElementById('username_label');
 	if (form.style.display == '') {
 		form.style.display = 'none'
 		logout.style.display = 'block'
-
+		username_label.style.display = 'block'
 	} else {
 		form.style.display = ''
 		logout.style.display = 'none'
+		username_label.style.display = 'none'
 	}
 }
