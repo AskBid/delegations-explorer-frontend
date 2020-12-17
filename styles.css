@@ -300,6 +300,7 @@ button:active {
 	min-height:40px;
 	flex-direction: column; 
 	justify-content: center;
+	margin: 0px 0px 0px 10px;
 }
 
 #login_form {

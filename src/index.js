@@ -1,28 +1,24 @@
-const BACKEND_URL = "http://localhost:3000"
+const BACKEND_URL = "http://localhost:3000";
+let session;
 
 document.addEventListener("DOMContentLoaded", () => {
-	button = document.getElementById('login_form');
-	button.addEventListener('submit', function() {
-		login()
-	}, false)
+	if (!localStorage.session) {
+		button = document.getElementById('login_form');
+		button.addEventListener('submit', function() {
+			login();
+		}, false)
+	}
+	
 });
 
-class User {
+class Session {
 	constructor(username, password){
 		this.username = username;
 		this.password = password;
-		this.jwt = null
+		this.jwt = null;
 	}
 
-	set jwt(token) {
-		this.jwt = token
-	}
-
-	get jwt() {
-		return this.jwt
-	}
-
-	post() {
+	postUser() {
 		fetch(`${BACKEND_URL}/users`,{
 	    method:'POST',
 	    headers: {
@@ -34,12 +30,14 @@ class User {
 	  })
 	  .then(resp=>resp.json())
 	  .then(obj=> {
-	  	console.log(obj)
+	  	console.log(obj);
 	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
-				switchLoginLogout(obj.user.username)
-				this.jwt = obj.jwt
+				switchLoginLogout(obj.user.username);
+				this.jwt = obj.jwt;
 			}
-			else {displayLoginError(obj)}
+			else {
+				displayLoginError(obj);
+			}
 	  })
 	}
 }
@@ -58,24 +56,24 @@ function displayLoginError(obj) {
 }
 
 function login() {
-	username = document.getElementById('username').value;
-	password = document.getElementById('password').value;
-	user = new User(username, password)
-	user.post()
+	const username = document.getElementById('username').value;
+	const password = document.getElementById('password').value;
+	const session = new Session(username, password);
+	session.postUser()
 }
 
 function switchLoginLogout(username) {
-	form = document.getElementById('login_form');
-	logout = document.getElementById('logout');
-	username_label = document.getElementById('username_label');
+	const form = document.getElementById('login_form');
+	const logout = document.getElementById('logout');
+	const username_label = document.getElementById('username_label');
 	if (form.style.display == '') {
-		form.style.display = 'none'
-		logout.style.display = 'block'
-		username_label.innerHTML = `<b>${username}</b>`
-		username_label.style.display = 'block'
+		form.style.display = 'none';
+		logout.style.display = 'block';
+		username_label.innerHTML = `<b>${username}</b>`;
+		username_label.style.display = 'block';
 	} else {
-		form.style.display = ''
-		logout.style.display = 'none'
-		username_label.style.display = 'none'
+		form.style.display = '';
+		logout.style.display = 'none';
+		username_label.style.display = 'none';
 	}
 }
