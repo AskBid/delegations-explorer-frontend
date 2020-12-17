@@ -10,7 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
 class User {
 	constructor(username, password){
 		this.username = username;
-		this.password = password
+		this.password = password;
+		this.jwt = null
+	}
+
+	set jwt(token) {
+		this.jwt = token
+	}
+
+	get jwt() {
+		return this.jwt
 	}
 
 	post() {
@@ -28,6 +37,7 @@ class User {
 	  	console.log(obj)
 	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
 				switchLoginLogout(obj.user.username)
+				this.jwt = obj.jwt
 			}
 			else {displayLoginError(obj)}
 	  })
