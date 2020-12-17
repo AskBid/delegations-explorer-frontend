@@ -13,20 +13,23 @@ class User {
 		this.password = password
 	}
 
-	post(){
+	post() {
 		fetch(`${BACKEND_URL}/users`,{
 	    method:'POST',
 	    headers: {
+   			// "Authorization": `Bearer ${localStorage.getItem('token')}`,
 	      "Content-Type":"application/json",
 	      "Accept": "application/json"
 	    },
 	    body: JSON.stringify(this)
 	  })
 	  .then(resp=>resp.json())
-	  .then(obj=> {	
+	  .then(obj=> {
 	  	console.log(obj)
-	  	if (obj) {
-				switchLoginLogout(obj.username)
+	  	debugger
+	  	if (obj.user) {
+	  		debugger
+				switchLoginLogout(obj.user.username)
 			}
 			else {displayLoginError()}
 	  })
@@ -36,15 +39,15 @@ class User {
 function displayLoginError() {
 	document.getElementById('username').value = '';
 	document.getElementById('password').value = '';
-	document.getElementById('username').placeholder = 'Username already used';
-	document.getElementById('password').placeholder = 'Or wrong password';
+	document.getElementById('username').placeholder = 'username already used';
+	document.getElementById('password').placeholder = 'OR wrong password';
 }
 
 function login() {
 	username = document.getElementById('username').value;
 	password = document.getElementById('password').value;
 	user = new User(username, password)
-	userObj = user.post()
+	user.post()
 }
 
 function switchLoginLogout(username) {
@@ -54,6 +57,8 @@ function switchLoginLogout(username) {
 	if (form.style.display == '') {
 		form.style.display = 'none'
 		logout.style.display = 'block'
+		debugger
+		username_label.innerHTML = `<b>${username}</b>`
 		username_label.style.display = 'block'
 	} else {
 		form.style.display = ''
