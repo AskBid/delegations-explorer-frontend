@@ -2,23 +2,40 @@ const BACKEND_URL = "http://localhost:3000";
 let session;
 
 document.addEventListener("DOMContentLoaded", () => {
-	if (!localStorage.session) {
-		button = document.getElementById('login_form');
-		button.addEventListener('submit', function() {
-			login();
-		}, false)
-	}
-	
+	button = document.getElementById('login_form');
+	button.addEventListener('submit', function() {
+		login();
+	}, false)
+
 });
 
 class Session {
+	constructor(username, user_id, jwt){
+		this.username = username;
+		this.user_id = user_id;
+		this.jwt = jwt;
+	}
+
+	save() {
+		localStorage.session = {
+			username: this.username,
+			password: this.user_id,
+			token: this.jwt
+		}
+	}
+
+	logout() {
+		localStorage.session = {}
+	}
+}
+
+class User {
 	constructor(username, password){
 		this.username = username;
 		this.password = password;
-		this.jwt = null;
 	}
 
-	postUser() {
+	post() {
 		fetch(`${BACKEND_URL}/users`,{
 	    method:'POST',
 	    headers: {
@@ -33,7 +50,8 @@ class Session {
 	  	console.log(obj);
 	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
 				switchLoginLogout(obj.user.username);
-				this.jwt = obj.jwt;
+				session = new Session(obj.user.username, obj.user.user_id, obj.jwt)
+				session.save()
 			}
 			else {
 				displayLoginError(obj);
@@ -58,8 +76,8 @@ function displayLoginError(obj) {
 function login() {
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
-	const session = new Session(username, password);
-	session.postUser()
+	const user = new User(username, password);
+	user.post()
 }
 
 function switchLoginLogout(username) {
@@ -76,4 +94,8 @@ function switchLoginLogout(username) {
 		logout.style.display = 'none';
 		username_label.style.display = 'none';
 	}
+}
+
+function checkSavedSession() {
+	localStorage.username
 }
