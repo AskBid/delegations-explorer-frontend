@@ -26,21 +26,25 @@ class User {
 	  .then(resp=>resp.json())
 	  .then(obj=> {
 	  	console.log(obj)
-	  	debugger
-	  	if (obj.user) {
-	  		debugger
+	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
 				switchLoginLogout(obj.user.username)
 			}
-			else {displayLoginError()}
+			else {displayLoginError(obj)}
 	  })
 	}
 }
 
-function displayLoginError() {
+function displayLoginError(obj) {
 	document.getElementById('username').value = '';
 	document.getElementById('password').value = '';
-	document.getElementById('username').placeholder = 'username already used';
-	document.getElementById('password').placeholder = 'OR wrong password';
+	if (obj.errors.password) {
+		document.getElementById('password').placeholder = obj.errors.password;
+	} 
+	if (obj.errors.username) {
+		document.getElementById('username').placeholder = obj.errors.username;
+	} else {
+		document.getElementById('username').value = obj.user.username;
+	}
 }
 
 function login() {
@@ -57,7 +61,6 @@ function switchLoginLogout(username) {
 	if (form.style.display == '') {
 		form.style.display = 'none'
 		logout.style.display = 'block'
-		debugger
 		username_label.innerHTML = `<b>${username}</b>`
 		username_label.style.display = 'block'
 	} else {
