@@ -68,7 +68,6 @@ class User {
 	  .then(obj=> {
 	  	console.log(obj);
 	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
-				switchLoginLogout(obj.user.username);
 				session = new Session(obj.user.username, obj.user.user_id, obj.jwt)
 				session.save()
 			}
