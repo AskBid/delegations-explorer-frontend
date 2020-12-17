@@ -5,27 +5,46 @@ document.addEventListener("DOMContentLoaded", () => {
 	button = document.getElementById('login_form');
 	button.addEventListener('submit', function() {
 		login();
-	}, false)
-
+	}, false);
+	restoreSession()
 });
 
 class Session {
 	constructor(username, user_id, jwt){
 		this.username = username;
 		this.user_id = user_id;
-		this.jwt = jwt;
+		this.token = token;
 	}
 
 	save() {
+		console.log('saving')
 		localStorage.session = {
 			username: this.username,
 			password: this.user_id,
-			token: this.jwt
+			token: this.token
 		}
+		switchLoginLogout()
 	}
 
 	logout() {
 		localStorage.session = {}
+		switchLoginLogout()
+	}
+
+	switchLoginLogout() {
+		const form = document.getElementById('login_form');
+		const logout = document.getElementById('logout');
+		const username_label = document.getElementById('username_label');
+		if (form.style.display == '') {
+			form.style.display = 'none';
+			logout.style.display = 'block';
+			username_label.innerHTML = `<b>${this.username}</b>`;
+			username_label.style.display = 'block';
+		} else {
+			form.style.display = '';
+			logout.style.display = 'none';
+			username_label.style.display = 'none';
+		}
 	}
 }
 
@@ -80,22 +99,9 @@ function login() {
 	user.post()
 }
 
-function switchLoginLogout(username) {
-	const form = document.getElementById('login_form');
-	const logout = document.getElementById('logout');
-	const username_label = document.getElementById('username_label');
-	if (form.style.display == '') {
-		form.style.display = 'none';
-		logout.style.display = 'block';
-		username_label.innerHTML = `<b>${username}</b>`;
-		username_label.style.display = 'block';
-	} else {
-		form.style.display = '';
-		logout.style.display = 'none';
-		username_label.style.display = 'none';
+function restoreSession() {
+	const savedSession = localStorage.session
+	if (savedSession) {
+		session = new Session(savedSession.username, savedSession.user_id, savedSession.token)
 	}
-}
-
-function checkSavedSession() {
-	localStorage.username
 }
