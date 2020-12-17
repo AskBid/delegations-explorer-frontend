@@ -27,7 +27,7 @@ class Session {
 	}
 
 	logout() {
-		localStorage.session = {}
+		delete localStorage.session
 		switchLoginLogout()
 	}
 
