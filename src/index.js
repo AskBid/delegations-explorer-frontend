@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 class Session {
-	constructor(username, user_id, jwt){
+	constructor(username, user_id, token){
 		this.username = username;
 		this.user_id = user_id;
 		this.token = token;
@@ -18,17 +18,13 @@ class Session {
 
 	save() {
 		console.log('saving')
-		localStorage.session = {
-			username: this.username,
-			password: this.user_id,
-			token: this.token
-		}
-		switchLoginLogout()
+		localStorage.token = this.token
+		this.switchLoginLogout()
 	}
 
 	logout() {
 		delete localStorage.session
-		switchLoginLogout()
+		this.switchLoginLogout()
 	}
 
 	switchLoginLogout() {
@@ -58,7 +54,6 @@ class User {
 		fetch(`${BACKEND_URL}/users`,{
 	    method:'POST',
 	    headers: {
-   			// "Authorization": `Bearer ${localStorage.getItem('token')}`,
 	      "Content-Type":"application/json",
 	      "Accept": "application/json"
 	    },
@@ -68,7 +63,7 @@ class User {
 	  .then(obj=> {
 	  	console.log(obj);
 	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
-				session = new Session(obj.user.username, obj.user.user_id, obj.jwt)
+				session = new Session(obj.username, obj.id, obj.token)
 				session.save()
 			}
 			else {
@@ -99,8 +94,23 @@ function login() {
 }
 
 function restoreSession() {
-	const savedSession = localStorage.session
-	if (savedSession) {
+	const token = localStorage.token
+	if (token) {
 		session = new Session(savedSession.username, savedSession.user_id, savedSession.token)
 	}
+}
+
+function post() {
+	fetch(`${BACKEND_URL}/users/2`,{
+    method:'GET',
+    headers: {
+ 			"Authorization": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.7NrXg388OF4nBKLWgg2tdQHsr3HaIeZoXYPisTTk-48",
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    },
+  })
+  .then(resp=>resp.json())
+  .then(obj=> {
+  	console.log(obj);
+  })
 }
