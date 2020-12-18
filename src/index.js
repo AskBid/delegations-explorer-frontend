@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	button.addEventListener('submit', function() {
 		login();
 	}, false);
-	restoreSession()
+	(async () => {
+		await restoreSession();
+		console.log('after')
+	})()
 });
 
 class Session {
@@ -17,13 +20,12 @@ class Session {
 	}
 
 	save() {
-		console.log('saving')
 		localStorage.token = this.token
 		this.switchLoginLogout()
 	}
 
 	logout() {
-		delete localStorage.session
+		delete localStorage.token
 		this.switchLoginLogout()
 	}
 
@@ -93,24 +95,23 @@ function login() {
 	user.post()
 }
 
-function restoreSession() {
+async function restoreSession() {
 	const token = localStorage.token
 	if (token) {
-		session = new Session(savedSession.username, savedSession.user_id, savedSession.token)
+		await fetch(`${BACKEND_URL}/restore`,{
+	    method:'GET',
+	    headers: {
+	 			"Authorization": `${token}`,
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+	    },
+	  })
+	  .then(resp=>resp.json())
+	  .then(obj=> {
+	  	console.log(obj)
+	  	console.log('making session with above')
+	  	session = new Session(obj.username, obj.id, token);
+	  	session.save()
+	  })
 	}
-}
-
-function post() {
-	fetch(`${BACKEND_URL}/users/2`,{
-    method:'GET',
-    headers: {
- 			"Authorization": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.7NrXg388OF4nBKLWgg2tdQHsr3HaIeZoXYPisTTk-48",
-      "Content-Type":"application/json",
-      "Accept": "application/json"
-    },
-  })
-  .then(resp=>resp.json())
-  .then(obj=> {
-  	console.log(obj);
-  })
 }
