@@ -2,10 +2,16 @@ const BACKEND_URL = "http://localhost:3000";
 let session;
 
 document.addEventListener("DOMContentLoaded", () => {
-	button = document.getElementById('login_form');
+	let button = document.getElementById('login_form');
 	button.addEventListener('submit', function() {
 		login();
-	}, false);
+	});
+	
+	button = document.getElementById('logout');
+	button.addEventListener('click', function() {
+		if (session) {session.logout()}
+	});
+
 	(async () => {
 		await restoreSession();
 		console.log('after')
