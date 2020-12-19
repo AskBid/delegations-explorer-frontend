@@ -118,3 +118,12 @@ async function restoreSession() {
 	  })
 	}
 }
+
+class StakeTab {
+	constructor(tabs_target){
+		this.tabs_target = tabs_target;
+	}
+
+	set real_delegation(){
+	}
+}
