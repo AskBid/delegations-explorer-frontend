@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function login() {
-	let username = document.getElementById('username').value;
-	let password = document.getElementById('password').value;
-	let user = new User(username, password);
+	const username = document.getElementById('username').value;
+	const password = document.getElementById('password').value;
+	const user = new User(username, password);
 	user.post()
 }
 
@@ -103,7 +103,7 @@ function displayLoginError(obj) {
 async function restoreSession() {
 	const token = localStorage.token
 	if (token) {
-		await fetch(`${BACKEND_URL}/restore`,{
+		await fetch(`${BACKEND_URL}/login`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
