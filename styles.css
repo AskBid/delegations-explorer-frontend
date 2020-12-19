@@ -387,12 +387,12 @@ button:active {
 
 .button_small {
 	min-height:100%;
-	border-radius: 5px;
+	border-radius: 3px;
 	width: 35px;
 	color: white;
 	line-height: 15px;
 	text-align: center;
-	margin: 0px 4px 0px 4px;
+	margin: 0px 0px 0px 4px;
 	padding: 0px;
 	cursor:pointer;
 }
