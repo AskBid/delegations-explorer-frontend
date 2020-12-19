@@ -211,6 +211,90 @@ main > .container > .container {
 	width: 270px;
 	border: 1px solid;
 	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+}
+
+.sub_tab + .sub_tab {
+	width: 235px;
+}
+
+.sub_tab + .sub_tab .pool_ticker {
+	font-size: 1em;
+}
+
+.pool_ticker {
+	display: inline;
+	font-weight: bold;
+	font-size: 1.16em;
+	text-align: left;
+	flex:1;
+	padding: 0px 10px;
+	margin: 3px 0px 0px 0px;
+}
+
+.x {
+	background-color: rgba(250,200,200,0.3);
+	border: none;
+	width: 5px;
+	border-radius: 4px;
+}
+
+.x:hover {
+	background-color: rgba(250,60,60,1);
+	border: none;
+	width: 5px;
+	border-radius: 4px;
+}
+
+.x:focus {
+	border: none;
+}
+
+.x:active {
+	border: none;
+	background-color: rgba(200,20,20,1);
+}
+
+.ticker_filler {
+	flex:2;
+}
+
+.sub_tab_body {
+	display: flex;
+}
+
+.tab_pool_values {
+	text-align: center;
+	flex:1 1;
+}
+
+.tab_values {
+	flex:5;
+}
+
+.row {
+	margin: 3px 0px 0px 0px;
+	display:flex;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+}
+
+.tab_value {
+	padding: 2px 0px;
+	flex:1;
+	text-align: right;
+	border-radius: 3px;
+	background-color: rgba(150,150,150,0.1);
+}
+
+.tab_label {
+	margin: 2px 5px;
+	color: #777;
+	flex:1;
+	text-align: right;
+	vertical-align: middle;
 }
 
 #login_area {
