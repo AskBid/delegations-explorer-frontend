@@ -2,11 +2,13 @@ const BACKEND_URL = "http://localhost:3000";
 let session;
 
 document.addEventListener("DOMContentLoaded", () => {
+
 	let button = document.getElementById('login_form');
-	button.addEventListener('submit', function() {
-		login();
+	button.addEventListener('submit', function(event) {
+		event.preventDefault()
+		login()
 	});
-	
+
 	button = document.getElementById('logout');
 	button.addEventListener('click', function() {
 		if (session) {session.logout()}
@@ -14,9 +16,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	(async () => {
 		await restoreSession();
-		console.log('after')
 	})()
 });
+
+function login() {
+	let username = document.getElementById('username').value;
+	let password = document.getElementById('password').value;
+	let user = new User(username, password);
+	user.post()
+}
+
+class User {
+	constructor(username, password){
+		this.username = username;
+		this.password = password;
+	}
+
+	post() {
+		fetch(`${BACKEND_URL}/users`,{
+	    method:'POST',
+	    headers: {
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+	    },
+	    body: JSON.stringify(this)
+	  })
+	  .then(resp=>resp.json())
+	  .then(obj=> {
+	  	console.log(obj);
+	  	if (obj.token) {
+				session = new Session(obj.username, obj.id, obj.token)
+				session.save()
+			}
+			else {
+				displayLoginError(obj);
+			}
+	  })
+	}
+}
 
 class Session {
 	constructor(username, user_id, token){
@@ -42,7 +79,7 @@ class Session {
 		if (form.style.display == '') {
 			form.style.display = 'none';
 			logout.style.display = 'block';
-			username_label.innerHTML = `<b>${this.username}</b>`;
+			username_label.innerHTML = `@<b>${this.username}</b>`;
 			username_label.style.display = 'block';
 		} else {
 			form.style.display = '';
@@ -52,53 +89,15 @@ class Session {
 	}
 }
 
-class User {
-	constructor(username, password){
-		this.username = username;
-		this.password = password;
-	}
-
-	post() {
-		fetch(`${BACKEND_URL}/users`,{
-	    method:'POST',
-	    headers: {
-	      "Content-Type":"application/json",
-	      "Accept": "application/json"
-	    },
-	    body: JSON.stringify(this)
-	  })
-	  .then(resp=>resp.json())
-	  .then(obj=> {
-	  	console.log(obj);
-	  	if (JSON.stringify(obj.errors) === JSON.stringify({})) {
-				session = new Session(obj.username, obj.id, obj.token)
-				session.save()
-			}
-			else {
-				displayLoginError(obj);
-			}
-	  })
-	}
-}
-
 function displayLoginError(obj) {
-	document.getElementById('username').value = '';
-	document.getElementById('password').value = '';
 	if (obj.errors.password) {
+		document.getElementById('password').value = '';
 		document.getElementById('password').placeholder = obj.errors.password;
 	} 
 	if (obj.errors.username) {
+		document.getElementById('username').value = '';
 		document.getElementById('username').placeholder = obj.errors.username;
-	} else {
-		document.getElementById('username').value = obj.user.username;
 	}
-}
-
-function login() {
-	const username = document.getElementById('username').value;
-	const password = document.getElementById('password').value;
-	const user = new User(username, password);
-	user.post()
 }
 
 async function restoreSession() {
@@ -114,8 +113,6 @@ async function restoreSession() {
 	  })
 	  .then(resp=>resp.json())
 	  .then(obj=> {
-	  	console.log(obj)
-	  	console.log('making session with above')
 	  	session = new Session(obj.username, obj.id, token);
 	  	session.save()
 	  })
