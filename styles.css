@@ -193,6 +193,8 @@ main > .container > .container {
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-end;
+	align-content: flex-start;
 	align-items: flex-end;
 }
 
@@ -207,15 +209,6 @@ main > .container > .container {
 	margin: 5px;
 	padding: 5px;
 	width: 270px;
-	border: 1px solid;
-	border-radius: 7px;
-}
-
-.sub_tab + .sub_tab{
-	background-color: white;
-	margin: 5px;
-	width: 180px;
-	padding: 5px;
 	border: 1px solid;
 	border-radius: 7px;
 }
