@@ -119,11 +119,32 @@ async function restoreSession() {
 	}
 }
 
-class StakeTab {
-	constructor(tabs_target){
-		this.tabs_target = tabs_target;
+class Tab {
+	constructor() {
+		// this.tabs_target = tabs_target;
+		this.tab = this.base_tab();
 	}
 
-	set real_delegation(){
-	}
-}
+	base_tab() {
+  	const html = `
+	  	<div class='tab'>
+				<div class='sub_tab'>
+					<button class='x'></button>
+					<div class='tab_pool_values'>
+				    <div class='pool_ticker'></div>
+					</div> 
+					<div class='tab_values'></div>
+				</div>
+			</div>`
+		// let div = document.createElement('div');
+		let div = document.getElementById('tabs_target');
+
+		div.innerHTML = html;
+	};
+
+	// set real_delegation(){
+	// }
+};
+
+
+class SubTab {}
