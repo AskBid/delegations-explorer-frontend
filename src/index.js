@@ -118,39 +118,3 @@ async function restoreSession() {
 	  })
 	}
 }
-
-class SubTab {
-	constructor(ticker) {
-		this.ticker = ticker;
-		this.tab = this.base_tab(ticker);
-	}
-
-	base_tab(ticker) {
-  	const html_string = `
-			<div class='sub_tab'>
-				<button class='x'></button>
-				<div class='tab_pool_values'>
-			    <div class='pool_ticker'>${ticker}</div>
-				</div> 
-				<div class='tab_values'></div>
-			</div>`
-		// let div = document.createElement('div');
-		const parser = new DOMParser();
-		const domString = html_string;
-		var html = parser.parseFromString(domString, 'text/html');    
-		// document.body.append(html.body.firstChild);
-		return html.body.firstChild
-	};
-
-	set 
-
-	inject() {
-		this.tab.getElementById('pool_ticker')
-	}
-
-	// set real_delegation(){
-	// }
-};
-
-
-class SubTab {}
