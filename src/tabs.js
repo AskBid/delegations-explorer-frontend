@@ -1,24 +1,59 @@
+
+
+
+
 class String_to_html {
 	buildHTML(html_string) {
 		const parser = new DOMParser();
 		const domString = html_string;
 		var html = parser.parseFromString(domString, 'text/html');    
 		return html.body.firstChild
-	}
+	};
 }
 
-class SubTab extends String_to_html {
-	constructor() {
+
+
+class Tab extends String_to_html {
+	constructor(stakeID, ticker) {
 		super();
+		this.stakeID = stakeID;
 		this.tab = this.base_tab();
-	}
+		this.mainSubTab = this.add_sub_tab(ticker);
+	};
 
 	base_tab() {
   	const html_string = `
+			<div class='tab' id='${this.stakeID}'>
+			</div>`;
+		return super.buildHTML(html_string)
+	};
+
+	add_sub_tab(ticker) {
+		const subTab = new SubTab(ticker);
+		this.tab.appendChild(subTab.tab);
+		return subTab
+	};
+
+	inject() {
+		const tabs_target = document.getElementById('tabs_target')
+		tabs_target.appendChild(this.tab)
+	};
+}
+
+
+
+class SubTab extends String_to_html {
+	constructor(ticker) {
+		super();
+		this.tab = this.base_tab(ticker);
+	}
+
+	base_tab(ticker) {
+  	const html_string =`
 			<div class='sub_tab'>
 				<button class='x'></button>
 				<div class='tab_pool_values'>
-			    <div class='pool_ticker'></div>
+			    <div class='pool_ticker'>${ticker}</div>
 				</div> 
 				<div class='tab_values'></div>
 			</div>`
@@ -26,7 +61,7 @@ class SubTab extends String_to_html {
 	};
 
 	set ticker(ticker) {
-		const div = this.tab.getElementById('pool_ticker')
+		const div = this.tab.getElementsByClassName('pool_ticker')[0]
 		div.innerHTML = ticker
 	}
 
@@ -35,13 +70,9 @@ class SubTab extends String_to_html {
 		const div = this.tab.getElementById('tab_values')
 		div.appendChild(row)
 	}
-
-	inject() {
-		const tabs_target = document.getElementById('tabs_target')
-		tabs_target.appendChild(this.tab)
-	};
-
 };
+
+
 
 class ValueRow extends String_to_html {
 	constructor(label, value, symbol = '₳') {
