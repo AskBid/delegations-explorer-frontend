@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	button = document.getElementById('logout');
 	button.addEventListener('click', function() {
+		event.preventDefault()
 		if (session) {session.logout()}
+	});
+
+	button = document.getElementById('add_stake');
+	button.addEventListener('click', function() {
+		event.preventDefault()
+		add_stake(this.previousElementSibling)
 	});
 
 	(async () => {

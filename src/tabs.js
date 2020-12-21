@@ -1,5 +1,5 @@
 function getStakes(user_id) {
-	const token = localStorage.token
+	const token = session.token
 	fetch(`${BACKEND_URL}/users/${user_id}/stakes`,{
     method:'GET',
     headers: {
@@ -12,6 +12,24 @@ function getStakes(user_id) {
   		console.log(obj);
 		})
 };
+
+
+function add_stake(addr_field) {
+	const stake_addr = addr_field.value
+	const token = session.token
+	fetch(`${BACKEND_URL}/users/${session.user_id}/stakes`,{
+    method:'POST',
+    headers: {
+    	"Authorization": `${token}`,
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({stake: stake_addr})
+  }).then(resp=>resp.json())
+  	.then(obj=> {
+  		console.log(obj);
+		})
+}
 
 
 class String_to_html {
