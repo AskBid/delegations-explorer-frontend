@@ -1,5 +1,17 @@
-
-
+function getStakes(user_id) {
+	const token = localStorage.token
+	fetch(`${BACKEND_URL}/users/${user_id}/stakes`,{
+    method:'GET',
+    headers: {
+    	"Authorization": `${token}`,
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    }
+  }).then(resp=>resp.json())
+  	.then(obj=> {
+  		console.log(obj);
+		})
+};
 
 
 class String_to_html {
