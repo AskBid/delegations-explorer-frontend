@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	button = document.getElementById('add_stake');
 	button.addEventListener('click', function() {
 		event.preventDefault()
-		add_stake(this.previousElementSibling)
+		postStake(this.previousElementSibling)
 	});
 
 	(async () => {
