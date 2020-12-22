@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		postStake(this.previousElementSibling)
 	});
 
+	button = document.getElementById('add_pool');
+	button.addEventListener('click', function() {
+		event.preventDefault()
+		postFollowedPool(this.previousElementSibling)
+	});
+
 	(async () => {
 		await restoreSession();
 	})()
