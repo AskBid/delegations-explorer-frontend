@@ -1,17 +1,9 @@
-function getStakes() {
-	const token = session.token
-	fetch(`${BACKEND_URL}/users/${session.user_id}/stakes`,{
-    method:'GET',
-    headers: {
-    	"Authorization": `${token}`,
-      "Content-Type":"application/json",
-      "Accept": "application/json"
-    }
-  }).then(resp=>resp.json())
-  	.then(obj=> {
-  		console.log(obj);
-		})
-};
+
+function renderTabs(obj) {
+	
+}
+
+
 
 function postFollowedPool(ticker_field) {
 	const ticker = ticker_field.value;
@@ -23,10 +15,11 @@ function postFollowedPool(ticker_field) {
       "Content-Type":"application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({stake: stake_addr})
+    body: JSON.stringify({pool: ticker})
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
+  		renderTabs(obj)
 		})
 }
 
