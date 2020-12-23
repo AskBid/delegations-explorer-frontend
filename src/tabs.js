@@ -1,4 +1,3 @@
-
 function renderTabs(activeStakes) {
 	return activeStakes.map((activeStake) => {
 		const tab = new Tab(activeStake.stake.address, activeStake.pool.ticker);
@@ -18,6 +17,23 @@ function renderSubTabs(tabs, followed_pools) {
 	});
 }
 
+function getFollowedPools() {
+	const token = session.token
+	fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
+	    method:'GET',
+	    headers: {
+	 			"Authorization": `${token}`,
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+	    }
+	  })
+	  .then(resp=>resp.json())
+	  .then(obj=> {
+	  	console.log(obj)
+	  	return obj
+	  })
+}
+
 function getActiveStakes() {
 	const token = session.token
 	fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
@@ -31,7 +47,7 @@ function getActiveStakes() {
 	  .then(resp=>resp.json())
 	  .then(obj=> {
 	  	console.log(obj)
-	  	return renderTabs(obj)
+	  	return obj
 	  })
 }
 
