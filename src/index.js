@@ -10,22 +10,35 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	button = document.getElementById('logout');
-	button.addEventListener('click', function() {
+	button.addEventListener('click', function(event) {
 		event.preventDefault()
 		if (session) {session.logout()}
 	});
 
 	button = document.getElementById('add_stake');
-	button.addEventListener('click', function() {
+	button.addEventListener('click', function(event) {
 		event.preventDefault()
 		postStake(this.previousElementSibling)
 	});
 
 	button = document.getElementById('add_pool');
-	button.addEventListener('click', function() {
+	button.addEventListener('click', function(event) {
 		event.preventDefault()
 		postFollowedPool(this.previousElementSibling)
 	});
+
+	button = document.getElementById('prev');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		changeEpoch(this)
+	});
+
+	button = document.getElementById('next');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		changeEpoch(this)
+	});
+
 
 	(async () => {
 		await fetchEpochInfo();
