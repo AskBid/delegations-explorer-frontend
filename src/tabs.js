@@ -1,15 +1,38 @@
 
-function renderTabs(obj) {
-	obj.active_stakes.forEach((stake) => {
-		const tab = new Tab('none', stake.pool.ticker);
-		tab.mainSubTab.addValue('delegation', stake.amount);
-		tab.mainSubTab.addValue('rewards', stake.rewards);
-		obj.followed_pools.forEach((pool)=> {
+function renderTabs(activeStakes) {
+	return activeStakes.map((activeStake) => {
+		const tab = new Tab(activeStake.stake.address, activeStake.pool.ticker);
+		tab.mainSubTab.addValue('delegation', activeStake.amount);
+		tab.mainSubTab.addValue('rewards', activeStake.rewards);
+		return tab
+	});
+}
+
+function renderSubTabs(tabs, followed_pools) {
+	tabs.forEach((tab) => {
+		followed_pools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker);
 			subTab.addValue('potential', stake.rewards * Math.random())
 		});
-		tab.inject();
+		tab.inject()
 	});
+}
+
+function getActiveStakes() {
+	const token = session.token
+	fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
+	    method:'GET',
+	    headers: {
+	 			"Authorization": `${token}`,
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+	    }
+	  })
+	  .then(resp=>resp.json())
+	  .then(obj=> {
+	  	console.log(obj)
+	  	return renderTabs(obj)
+	  })
 }
 
 
@@ -24,14 +47,12 @@ function postFollowedPool(ticker_field) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-    	pool: ticker, 
-    	epochno: epoch.current
+    	pool: ticker
     })
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
-  		renderTabs(obj)
-		})
+		}).then(getActiveStakes())
 }
 
 
@@ -46,13 +67,11 @@ function postStake(addr_field) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-    	stake: stake_addr, 
-    	epochno: epoch.current
+    	stake: stake_addr
     })
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
-  		renderTabs(obj)
 		})
 }
 
