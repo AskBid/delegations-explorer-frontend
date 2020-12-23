@@ -1,3 +1,11 @@
+async function render() {
+	const activeStakes = await getActiveStakes()
+	const followed_pools = await getFollowedPools()
+	const tabs = renderTabs(activeStakes)
+	renderSubTabs(tabs, followed_pools)
+}
+
+
 function renderTabs(activeStakes) {
 	return activeStakes.map((activeStake) => {
 		const tab = new Tab(activeStake.stake.address, activeStake.pool.ticker);
@@ -7,9 +15,9 @@ function renderTabs(activeStakes) {
 	});
 }
 
-function renderSubTabs(tabs, followed_pools) {
+function renderSubTabs(tabs, followedPools) {
 	tabs.forEach((tab) => {
-		followed_pools.forEach((pool)=> {
+		followedPools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker);
 			subTab.addValue('potential', stake.rewards * Math.random())
 		});
@@ -19,7 +27,7 @@ function renderSubTabs(tabs, followed_pools) {
 
 function getFollowedPools() {
 	const token = session.token
-	fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
+	return fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
@@ -36,7 +44,7 @@ function getFollowedPools() {
 
 function getActiveStakes() {
 	const token = session.token
-	fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
+	return fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
