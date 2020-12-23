@@ -1,11 +1,14 @@
 
 function renderTabs(obj) {
-	const stakes = obj.active_stakes;
-	stakes.forEach((stake) => {
-		const tab = new Tab('none', stake.pool.ticker)
-		tab.mainSubTab.addValue('delegation', stake.amount)
-		tab.mainSubTab.addValue('reward', stake.rewards)
-		tab.inject()
+	obj.active_stakes.forEach((stake) => {
+		const tab = new Tab('none', stake.pool.ticker);
+		tab.mainSubTab.addValue('delegation', stake.amount);
+		tab.mainSubTab.addValue('reward', stake.rewards);
+		obj.followed_pools.forEach((pool)=> {
+			const subTab = tab.add_sub_tab(pool.ticker);
+			subTab.addValue('potential', stake.rewards * Math.random())
+		});
+		tab.inject();
 	});
 }
 
@@ -146,7 +149,7 @@ class ValueRow extends String_to_html {
 		const html_string = `
 			<div class='row'>
 		      <div class='tab_label'>${this.label}:</div>
-		      <div class='tab_value'>${this.formatted_value()}${this.symbol}</div>
+		      <div class='tab_value'>${this.formatted_value()} ${this.symbol}</div>
 		  </div>`
 		return super.buildHTML(html_string) 
 	};
