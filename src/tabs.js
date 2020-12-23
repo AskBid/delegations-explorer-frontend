@@ -1,29 +1,23 @@
 async function render() {
 	const activeStakes = await getActiveStakes()
 	const followed_pools = await getFollowedPools()
-	const tabs = renderTabs(activeStakes)
-	renderSubTabs(tabs, followed_pools)
+	renderTabs(activeStakes, followed_pools)
 }
 
 
-function renderTabs(activeStakes) {
-	return activeStakes.map((activeStake) => {
+function renderTabs(activeStakes, followedPools) {
+	activeStakes.forEach((activeStake) => {
 		const tab = new Tab(activeStake.stake.address, activeStake.pool.ticker);
 		tab.mainSubTab.addValue('delegation', activeStake.amount);
 		tab.mainSubTab.addValue('rewards', activeStake.rewards);
-		return tab
-	});
-}
-
-function renderSubTabs(tabs, followedPools) {
-	tabs.forEach((tab) => {
 		followedPools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker);
-			subTab.addValue('potential', stake.rewards * Math.random())
+			subTab.addValue('potential', activeStake.rewards * Math.random())
 		});
 		tab.inject()
 	});
 }
+
 
 function getFollowedPools() {
 	const token = session.token
