@@ -8,7 +8,7 @@ class Epoch {
 	}
 
 	move(move) {
-		if (this.current + move < max && this.current + move > min) {
+		if (this.current + move < this.max && this.current + move > this.min) {
 			this.current += move
 		}
 	}
@@ -25,25 +25,35 @@ function fetchEpochInfo() {
   .then(resp=>resp.json())
   .then(obj=> {
   	epoch = new Epoch(obj.min, obj.max, obj.max);
+  	displayEpoch()
   	checkEpochButtonState()
   })
 }
 
 function changeEpoch(element) {
-	let move = element.div == 'next' ? 1 : -1
+	let move = element.id === 'next' ? 1 : -1
 	epoch.move(move)
+	displayEpoch()
 	checkEpochButtonState()
 }
 
+function displayEpoch() {
+	if (epoch) {
+		document.getElementById('epoch').innerHTML = `epoch ${epoch.current}`
+	} else {
+		document.getElementById('epoch').innerHTML = `null epoch!`
+	}
+}
+
 function checkEpochButtonState() {
-	if (this.current === max) {
+	if (epoch.current === epoch.max) {
 			document.getElementById("next").disabled = true;
-	} else (this.current != max) {
+	} else {
 			document.getElementById("next").disabled = false;
 	}
-	if (this.current === min) {
+	if (epoch.current === epoch.min) {
 		document.getElementById("prev").disabled = true;
-	} else (this.current === min) {
+	} else {
 		document.getElementById("prev").disabled = false;
 	}
 }
