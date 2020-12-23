@@ -3,7 +3,7 @@ function renderTabs(obj) {
 	obj.active_stakes.forEach((stake) => {
 		const tab = new Tab('none', stake.pool.ticker);
 		tab.mainSubTab.addValue('delegation', stake.amount);
-		tab.mainSubTab.addValue('reward', stake.rewards);
+		tab.mainSubTab.addValue('rewards', stake.rewards);
 		obj.followed_pools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker);
 			subTab.addValue('potential', stake.rewards * Math.random())
