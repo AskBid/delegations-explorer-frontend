@@ -8,7 +8,7 @@ class Epoch {
 	}
 
 	move(move) {
-		if (this.current + move < this.max && this.current + move > this.min) {
+		if (this.current + move <= this.max && this.current + move >= this.min) {
 			this.current += move
 		}
 	}
