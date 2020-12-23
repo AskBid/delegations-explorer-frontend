@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	(async () => {
 		await fetchEpochInfo();
+		checkEpochButtonState()
 		await restoreSession();
 	})()
 });
