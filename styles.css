@@ -147,14 +147,14 @@ main > .container > .container {
 
 
 .chart_container {
-	background-color: rgba(150,150,150,0.11);
+	/*background-color: rgba(150,150,150,0.11);*/
 	min-height: 400px;
 	flex: 2 0 200px;
 	/*border: 1px solid;*/
 }
 
 .histo_container {
-	background-color: rgba(150,150,150,0.11);
+	/*background-color: rgba(150,150,150,0.11);*/
 	/*min-height: 500px;*/
 	width: 100px;
 	flex: 0 1 200px;
@@ -401,7 +401,7 @@ button[disabled]{
 	color: white;
 	line-height: 15px;
 	text-align: center;
-	margin: 0px 0px 0px 4px;
+	margin: 0px 6px 0px 4px;
 	padding: 0px;
 	cursor:pointer;
 }

@@ -1,8 +1,13 @@
 
 function renderTabs(obj) {
-	
+	const stakes = obj.active_stakes;
+	stakes.forEach((stake) => {
+		const tab = new Tab('none', stake.pool.ticker)
+		tab.mainSubTab.addValue('delegation', stake.amount)
+		tab.mainSubTab.addValue('reward', stake.rewards)
+		tab.inject()
+	});
 }
-
 
 
 function postFollowedPool(ticker_field) {
@@ -15,7 +20,10 @@ function postFollowedPool(ticker_field) {
       "Content-Type":"application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({pool: ticker})
+    body: JSON.stringify({
+    	pool: ticker, 
+    	epochno: epoch.current
+    })
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
@@ -34,10 +42,14 @@ function postStake(addr_field) {
       "Content-Type":"application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify({stake: stake_addr})
+    body: JSON.stringify({
+    	stake: stake_addr, 
+    	epochno: epoch.current
+    })
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
+  		renderTabs(obj)
 		})
 }
 
@@ -106,8 +118,9 @@ class SubTab extends String_to_html {
 	}
 
 	addValue(label, value) {
-		const row = new ValueRow(label, value)
-		const div = this.tab.getElementById('tab_values')
+		const row = new ValueRow(label, value).build_row()
+		const div = this.tab.getElementsByClassName('tab_values')[0]
+		// debugger
 		div.appendChild(row)
 	}
 };
@@ -122,11 +135,18 @@ class ValueRow extends String_to_html {
 		this.symbol = symbol;
 	}
 
+	formatted_value() {
+		if (this.symbol === '₳'){
+			const value = this.value / 1000000;
+			return parseInt(value)
+		} else { return this.value }
+	}
+
 	build_row() {
-		html_string = `
+		const html_string = `
 			<div class='row'>
 		      <div class='tab_label'>${this.label}:</div>
-		      <div class='tab_value'>${this.value}${this.symbol}</div>
+		      <div class='tab_value'>${this.formatted_value()}${this.symbol}</div>
 		  </div>`
 		return super.buildHTML(html_string) 
 	};
