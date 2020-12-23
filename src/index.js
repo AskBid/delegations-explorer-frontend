@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	(async () => {
+		await fetchEpochInfo();
 		await restoreSession();
 	})()
 });

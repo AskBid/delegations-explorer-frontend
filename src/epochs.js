@@ -1,16 +1,23 @@
-let epoch = new Epoch()
+let epoch = null
 
 class Epoch {
-	constructor(min, max) {
+	constructor(min, max, current) {
 		this.min = min;
 		this.max = max;
-		this.current = max;
+		this.current = current;
 	}
-
-	set current() {}
-	get current() {}
 }
 
 function fetchEpochInfo() {
-
+	fetch(`${BACKEND_URL}/epoch`,{
+    method:'GET',
+    headers: {
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    },
+  })
+  .then(resp=>resp.json())
+  .then(obj=> {
+  	epoch = new Epoch(obj.min, obj.max, obj.max);
+  })
 }
