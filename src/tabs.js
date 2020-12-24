@@ -170,11 +170,11 @@ class SubTab extends String_to_html {
 			</div>`;
 
 		const subTab = super.buildHTML(html_string);
-		subTab.getElementsByClassName('delete');
-		subTab.addEventListener('submit', function(event) {
+		const form = subTab.getElementsByClassName('delete')[0];
+		form.addEventListener('submit', function(event) {
 			event.preventDefault();
-			const formData = new FormData(this)
 			debugger
+			const formData = new FormData(this)
 			fetch(`${BACKEND_URL}/users`,{
 				method:'DELETE',
 				headers: {
