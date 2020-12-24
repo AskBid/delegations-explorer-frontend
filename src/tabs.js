@@ -1,7 +1,13 @@
 async function render() {
-	const activeStakes = await getActiveStakes()
-	const followedPools = await getFollowedPools()
-	renderTabs(activeStakes, followedPools)
+	const activeStakes = await getActiveStakes();
+	const followedPools = await getFollowedPools();
+	emptyTabs();
+	renderTabs(activeStakes, followedPools);
+}
+
+function emptyTabs() {
+	const tabs_target = document.getElementById('tabs_target')
+	tabs_target.innerHTML = '';
 }
 
 
@@ -177,10 +183,17 @@ class SubTab extends String_to_html {
 			fetch(`${BACKEND_URL}/users/${session.user_id}/${this.type.value}/${this.id.value}`,{
 				method:'DELETE',
 				headers: {
-	      "Content-Type":"application/json",
-	      "Accept": "application/json"
+					"Authorization":session.token,
+		      "Content-Type":"application/json",
+		      "Accept": "application/json"
 		    }
 			})
+			.then(resp=>resp.json())
+			.then((obj)=>{
+				console.log(obj)
+				render()
+			});
+			
 		});
 
 		return subTab
