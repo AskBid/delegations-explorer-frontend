@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet"><meta charset="utf-8">
     <title>Cardano Rewards Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-inputs.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -56,14 +57,18 @@
     			<div class='tabs_container'>
     				<div class='insert'>
                         <form>
-    					   <input type='textfield' placeholder='stakeu1...'>
+                            <div class="autocomplete">
+    					       <input type='textfield' placeholder='stakeu1...'>
+                            </div>
     					   <button class='button_small' id='add_stake'><b>+</b></button>
                         </form>
     				</div>
     				<div class='insert'>
-                        <form>
-    						<input type='textfield' placeholder='POOL (ticker)'>
-    						<button class='button_small' id='add_pool'><b>+</b></button>
+                        <form autocomplete="off">
+                            <div class="autocomplete">
+    						  <input id='insert_pool' type='text' placeholder='POOL (ticker)'>
+                            </div>
+    						<button type='submit' class='button_small' id='add_pool'><b>+</b></button>
                         </form>
     				</div>
                     <span id='tabs_target'>
@@ -86,6 +91,7 @@
 		</main>
 		<footer>delegate to black SWAN pool &hearts;</footer>
 
+    <script src="./src/autocomplete.js"></script>
     <script src="./src/epochs.js"></script>
     <script src="./src/index.js"></script>
     <script src="./src/tabs.js"></script>
