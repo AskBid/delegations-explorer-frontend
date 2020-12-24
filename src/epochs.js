@@ -6,7 +6,6 @@ class Epoch {
 		this.max = max;
 		this.current = current;
 	}
-
 	move(move) {
 		if (this.current + move <= this.max && this.current + move >= this.min) {
 			this.current += move
@@ -35,6 +34,7 @@ function changeEpoch(element) {
 	epoch.move(move)
 	displayEpoch()
 	checkEpochButtonState()
+	render()
 }
 
 function displayEpoch() {
