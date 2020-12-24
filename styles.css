@@ -190,12 +190,12 @@ main > .container > .container {
 	flex: 1;
 }
 
-.insert > form > input {
+/*.insert > form > input {
 	flex: 1;
 	width: 100%;
 	margin: 0px;
-	padding: 0px 5px 0px 5px;
-}
+	padding: 0px;
+}*/
 
 .tab {
 	background-color: rgba(200,189,250,0.4);
@@ -438,7 +438,7 @@ button[disabled]{
 	color: white;
 	line-height: 15px;
 	text-align: center;
-	margin: 0px 6px 0px 4px;
+	margin: 0px 6px 0px 14px;
 	padding: 0px;
 	cursor:pointer;
 }
