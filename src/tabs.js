@@ -49,6 +49,7 @@ function getFollowedPools() {
 	  })
 	  .then(resp=>resp.json())
 	  .then(obj=> {
+	  	console.log('getFollowedPools:')
 	  	console.log(obj)
 	  	return obj
 	  })
@@ -66,6 +67,7 @@ function getActiveStakes() {
 	  })
 	  .then(resp=>resp.json())
 	  .then(obj=> {
+	  	console.log('getActiveStakes:')
 	  	console.log(obj)
 	  	return obj
 	  })
@@ -75,7 +77,7 @@ function getActiveStakes() {
 function postFollowedPool(ticker_field) {
 	const ticker = ticker_field.value;
 	const token = session.token;
-	fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
+	return fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
     method:'POST',
     headers: {
     	"Authorization": `${token}`,
@@ -95,7 +97,7 @@ function postFollowedPool(ticker_field) {
 function postStake(addr_field) {
 	const stake_addr = addr_field.value;
 	const token = session.token;
-	fetch(`${BACKEND_URL}/users/${session.user_id}/stakes`,{
+	return fetch(`${BACKEND_URL}/users/${session.user_id}/stakes`,{
     method:'POST',
     headers: {
     	"Authorization": `${token}`,

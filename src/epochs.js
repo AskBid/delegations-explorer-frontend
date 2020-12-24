@@ -31,17 +31,17 @@ function fetchEpochInfo() {
 
 function changeEpoch(element) {
 	let move = element.id === 'next' ? 1 : -1
-	epoch.move(move)
-	displayEpoch()
-	checkEpochButtonState()
-	render()
+	epoch.move(move);
+	displayEpoch();
+	checkEpochButtonState();
+	render();
 }
 
 function displayEpoch() {
 	if (epoch) {
-		document.getElementById('epoch').innerHTML = `epoch ${epoch.current}`
+		document.getElementById('epoch').innerHTML = `epoch ${epoch.current}`;
 	} else {
-		document.getElementById('epoch').innerHTML = `null epoch!`
+		document.getElementById('epoch').innerHTML = `null epoch!`;
 	}
 }
 
