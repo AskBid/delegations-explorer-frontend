@@ -7,11 +7,11 @@ async function render() {
 
 function renderTabs(activeStakes, followedPools) {
 	activeStakes.forEach((activeStake) => {
-		const tab = new Tab(activeStake.stake.address, activeStake.pool.ticker);
+		const tab = new Tab(activeStake.stake.address, activeStake.stake.id,activeStake.pool.ticker);
 		tab.mainSubTab.addValue('delegation', activeStake.amount);
 		tab.mainSubTab.addValue('rewards', activeStake.rewards);
 		followedPools.forEach((pool)=> {
-			const subTab = tab.add_sub_tab(pool.ticker);
+			const subTab = tab.add_sub_tab(pool.ticker, pool.id);
 			subTab.addValue('potential', activeStake.rewards * Math.random())
 		});
 		tab.inject()
@@ -119,11 +119,12 @@ class String_to_html {
 
 
 class Tab extends String_to_html {
-	constructor(stakeID, ticker) {
+	constructor(stakeAddr, stake_id, ticker) {
 		super();
-		this.stakeID = stakeID;
+		this.stakeAddr = stakeAddr;
+		this.stake_id = stake_id;
 		this.tab = this.base_tab();
-		this.mainSubTab = this.add_sub_tab(ticker);
+		this.mainSubTab = this.add_sub_tab(ticker, stake_id, 'stakes');
 	};
 
 	base_tab() {
@@ -133,8 +134,8 @@ class Tab extends String_to_html {
 		return super.buildHTML(html_string)
 	};
 
-	add_sub_tab(ticker) {
-		const subTab = new SubTab(ticker);
+	add_sub_tab(ticker, id, type) {
+		const subTab = new SubTab(ticker, id, type);
 		this.tab.appendChild(subTab.tab);
 		return subTab
 	};
@@ -161,7 +162,7 @@ class SubTab extends String_to_html {
 				<form class='delete'>
 					<input type="hidden" name='type' value='${this.type}'>
 					<input type="hidden" name='id' value='${this.id}'>
-					<button class='x'>x</button>
+					<button type="submit" class='x'>x</button>
 				</form>
 				<div class='tab_pool_values'>
 			    <div class='pool_ticker'>${ticker}</div>
@@ -173,15 +174,12 @@ class SubTab extends String_to_html {
 		const form = subTab.getElementsByClassName('delete')[0];
 		form.addEventListener('submit', function(event) {
 			event.preventDefault();
-			debugger
-			const formData = new FormData(this)
-			fetch(`${BACKEND_URL}/users`,{
+			fetch(`${BACKEND_URL}/users/${session.user_id}/${this.type.value}/${this.id.value}`,{
 				method:'DELETE',
 				headers: {
 	      "Content-Type":"application/json",
 	      "Accept": "application/json"
-		    },
-		    body: formData
+		    }
 			})
 		});
 
