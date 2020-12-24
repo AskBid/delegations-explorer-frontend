@@ -16,17 +16,16 @@ function renderTabs(activeStakes, followedPools) {
 		const tab = new Tab(activeStake.stake.address, activeStake.stake.id,activeStake.pool.ticker);
 		tab.mainSubTab.addValue('delegation', activeStake.amount);
 		tab.mainSubTab.addValue('rewards', activeStake.rewards);
+		tab.mainSubTab.addLink(activeStake.pool.poolid);
 		followedPools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker, pool.id);
+			subTab.addLink(pool.poolid)
 			subTab.addValue('potential', activeStake.rewards * Math.random())
 		});
 		tab.inject()
 	});
 }
 
-function deleteTab() {
-
-}
 
 async function postStakeAndRender(ticker_field) {
 	await postStake(ticker_field)
@@ -159,10 +158,16 @@ class SubTab extends String_to_html {
 		super();
 		this.id = id;
 		this.type = type;
-		this.tab = this.base_tab(ticker);
+		this.ticker = ticker;
+		this.tab = this.base_tab();
 	}
 
-	base_tab(ticker) {
+	addLink(poolid) {
+		const div = this.tab.getElementsByClassName('pool_ticker')[0];
+		div.innerHTML = `<a href='https://cardanoscan.io/pool/${poolid}'>${this.ticker}</a>`;
+	}
+
+	base_tab() {
   	const html_string =`
 			<div class='sub_tab'>
 				<form class='delete'>
@@ -171,7 +176,7 @@ class SubTab extends String_to_html {
 					<button type="submit" class='x'>x</button>
 				</form>
 				<div class='tab_pool_values'>
-			    <div class='pool_ticker'>${ticker}</div>
+			    <div class='pool_ticker'>${this.ticker}</div>
 				</div> 
 				<div class='tab_values'></div>
 			</div>`;
@@ -193,7 +198,6 @@ class SubTab extends String_to_html {
 				console.log(obj)
 				render()
 			});
-			
 		});
 
 		return subTab

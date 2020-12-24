@@ -234,6 +234,20 @@ main > .container > .container {
 	margin: 3px 0px 0px 0px;
 }
 
+.pool_ticker > a {
+	text-decoration: none;
+	color: rgba(0,0,0,0.99);
+}
+
+.sub_tab + .sub_tab .pool_ticker > a {
+	text-decoration: none;
+	color: rgba(20,20,20,0.6);
+}
+
+a:hover, .sub_tab + .sub_tab .pool_ticker > a:hover {
+	text-decoration: underline;;
+}
+
 .delete {
 	display: flex;
 	align-items: stretch;
