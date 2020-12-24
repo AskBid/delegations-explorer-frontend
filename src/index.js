@@ -1,50 +1,48 @@
 const BACKEND_URL = "http://localhost:3000";
 let session;
 
-init();
-
-async function init() {
-	await fetchEpochInfo();
-	debugger
-	await restoreSession();
-	document.addEventListener("DOMContentLoaded", () => {
-		let button = document.getElementById('login_form');
-		button.addEventListener('submit', function(event) {
-			event.preventDefault()
-			login()
-		});
-
-		button = document.getElementById('logout');
-		button.addEventListener('click', function(event) {
-			event.preventDefault()
-			if (session) {session.logout()}
-		});
-
-		button = document.getElementById('add_stake');
-		button.addEventListener('click', function(event) {
-			event.preventDefault()
-			postStakeAndRender(this.previousElementSibling)
-		});
-
-		button = document.getElementById('add_pool');
-		button.addEventListener('click', function(event) {
-			event.preventDefault()
-			postFollowedPoolsAndRender(this.previousElementSibling)
-		});
-
-		button = document.getElementById('prev');
-		button.addEventListener('click', function(event) {
-			event.preventDefault()
-			changeEpoch(this)
-		});
-
-		button = document.getElementById('next');
-		button.addEventListener('click', function(event) {
-			event.preventDefault()
-			changeEpoch(this)
-		});
+document.addEventListener("DOMContentLoaded", () => {
+	let button = document.getElementById('login_form');
+	button.addEventListener('submit', function(event) {
+		event.preventDefault()
+		login()
 	});
-}
+
+	button = document.getElementById('logout');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		if (session) {session.logout()}
+	});
+
+	button = document.getElementById('add_stake');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		postStakeAndRender(this.previousElementSibling)
+	});
+
+	button = document.getElementById('add_pool');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		postFollowedPoolsAndRender(this.previousElementSibling)
+	});
+
+	button = document.getElementById('prev');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		changeEpoch(this)
+	});
+
+	button = document.getElementById('next');
+	button.addEventListener('click', function(event) {
+		event.preventDefault()
+		changeEpoch(this)
+	});
+	(async ()=> {
+		await fetchEpochInfo();
+		await restoreSession();
+		render()
+	})()
+});
 
 function login() {
 	const username = document.getElementById('username').value;
@@ -142,8 +140,6 @@ function restoreSession() {
 	  .then(obj=> {
 	  	session = new Session(obj.username, obj.id, token);
 	  	session.save()
-	  	// debugger
-	  	render()
 	  })
 	}
 }

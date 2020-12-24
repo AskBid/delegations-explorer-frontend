@@ -14,7 +14,7 @@ class Epoch {
 }
 
 function fetchEpochInfo() {
-	fetch(`${BACKEND_URL}/epoch`,{
+	return fetch(`${BACKEND_URL}/epoch`,{
     method:'GET',
     headers: {
       "Content-Type":"application/json",

@@ -51,7 +51,6 @@ function getFollowedPools() {
 
 function getActiveStakes() {
 	const token = session.token
-	debugger
 	return fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
