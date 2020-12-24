@@ -185,7 +185,7 @@ class SubTab extends String_to_html {
 			})
 		});
 
-		return super.buildHTML(html_string);
+		return subTab
 	};
 
 	// set ticker(ticker) {

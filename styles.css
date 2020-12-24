@@ -234,27 +234,35 @@ main > .container > .container {
 	margin: 3px 0px 0px 0px;
 }
 
+.delete {
+	flex: 0;
+}
+
 .x {
 	background-color: rgba(250,200,200,0.3);
 	border: none;
-	width: 5px;
+	width: 16px;
 	border-radius: 4px;
+	text-align: center;
+	padding: 0px;
+	color:  rgba(220,185,185,0.35);
+	cursor: pointer;
 }
 
 .x:hover {
 	background-color: rgba(250,60,60,1);
+	color:  rgba(35,35,55,0.35);
 	border: none;
-	width: 5px;
-	border-radius: 4px;
 }
 
 .x:focus {
-	border: none;
+	border: 0.5px solid grey;
 }
 
 .x:active {
 	border: none;
 	background-color: rgba(200,20,20,1);
+	color:  rgba(35,35,55,0.35);
 }
 
 .ticker_filler {
