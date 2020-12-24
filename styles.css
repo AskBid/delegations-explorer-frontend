@@ -235,6 +235,8 @@ main > .container > .container {
 }
 
 .delete {
+	display: flex;
+	align-items: stretch;
 	flex: 0;
 }
 
