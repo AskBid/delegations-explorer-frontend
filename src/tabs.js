@@ -1,7 +1,7 @@
 async function render() {
 	const activeStakes = await getActiveStakes()
-	const followed_pools = await getFollowedPools()
-	renderTabs(activeStakes, followed_pools)
+	const followedPools = await getFollowedPools()
+	renderTabs(activeStakes, followedPools)
 }
 
 
@@ -18,6 +18,19 @@ function renderTabs(activeStakes, followedPools) {
 	});
 }
 
+function deleteTab() {
+
+}
+
+async function postStakeAndRender(ticker_field) {
+	await postStake(ticker_field)
+	render()
+}
+
+async function postFollowedPoolsAndRender(ticker_field) {
+	await postFollowedPool(ticker_field)
+	render()
+}
 
 function getFollowedPools() {
 	const token = session.token
@@ -38,6 +51,7 @@ function getFollowedPools() {
 
 function getActiveStakes() {
 	const token = session.token
+	debugger
 	return fetch(`${BACKEND_URL}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
@@ -70,7 +84,7 @@ function postFollowedPool(ticker_field) {
   }).then(resp=>resp.json())
   	.then(obj=> {
   		console.log(obj);
-		}).then(getActiveStakes())
+		})
 }
 
 
@@ -135,27 +149,50 @@ class Tab extends String_to_html {
 
 
 class SubTab extends String_to_html {
-	constructor(ticker) {
+	constructor(ticker, id, type = 'pools') {
 		super();
+		this.id = id;
+		this.type = type;
 		this.tab = this.base_tab(ticker);
 	}
 
 	base_tab(ticker) {
   	const html_string =`
 			<div class='sub_tab'>
-				<button class='x'></button>
+				<form class='delete'>
+					<input type="hidden" name='type' value='${this.type}'>
+					<input type="hidden" name='id' value='${this.id}'>
+					<button class='x'>x</button>
+				</form>
 				<div class='tab_pool_values'>
 			    <div class='pool_ticker'>${ticker}</div>
 				</div> 
 				<div class='tab_values'></div>
-			</div>`
-		return super.buildHTML(html_string) 
+			</div>`;
+
+		const subTab = super.buildHTML(html_string);
+		subTab.getElementsByClassName('delete');
+		subTab.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const formData = new FormData(this)
+			debugger
+			fetch(`${BACKEND_URL}/users`,{
+				method:'DELETE',
+				headers: {
+	      "Content-Type":"application/json",
+	      "Accept": "application/json"
+		    },
+		    body: formData
+			})
+		});
+
+		return super.buildHTML(html_string);
 	};
 
-	set ticker(ticker) {
-		const div = this.tab.getElementsByClassName('pool_ticker')[0]
-		div.innerHTML = ticker
-	}
+	// set ticker(ticker) {
+	// 	const div = this.tab.getElementsByClassName('pool_ticker')[0]
+	// 	div.innerHTML = ticker
+	// }
 
 	addValue(label, value) {
 		const row = new ValueRow(label, value).build_row()
