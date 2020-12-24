@@ -37,12 +37,29 @@ document.addEventListener("DOMContentLoaded", () => {
 		event.preventDefault()
 		changeEpoch(this)
 	});
+
 	(async ()=> {
+		const tickers = await getPools();
+		autocomplete(document.getElementById("insert_pool"), tickers);
 		await fetchEpochInfo();
 		await restoreSession();
 		render()
 	})()
 });
+
+function getPools() {
+	return fetch(`${BACKEND_URL}/pools`, {
+		method:'GET',
+	  headers: {
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    }
+	}).then(resp=>resp.json())
+	  .then(obj=> {
+	  	const tickers = obj.map(obj=>obj.ticker)
+	  	return tickers
+	  })
+}
 
 function login() {
 	const username = document.getElementById('username').value;
