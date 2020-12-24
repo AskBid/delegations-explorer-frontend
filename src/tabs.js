@@ -166,7 +166,7 @@ class SubTab extends String_to_html {
 
 	addLink(poolid) {
 		const div = this.tab.getElementsByClassName('pool_ticker')[0];
-		div.innerHTML = `<a href='https://cardanoscan.io/pool/${poolid}'>${this.ticker}</a>`;
+		div.innerHTML = `<a href='https://cardanoscan.io/pool/${poolid}' target="_blank">${this.ticker}</a>`;
 	}
 
 	base_tab() {
