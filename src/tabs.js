@@ -138,7 +138,8 @@ class Tab extends String_to_html {
 
 	base_tab() {
   	const html_string = `
-			<div class='tab' id='${this.stakeID}'>
+			<div class='tab' id='${this.stake_id}'>
+			<div class='tab_title'>${this.stakeAddr.slice(0, 18)}...<div>
 			</div>`;
 		return super.buildHTML(html_string)
 	};
