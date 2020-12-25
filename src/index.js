@@ -15,15 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	button = document.getElementById('add_stake');
-	button.addEventListener('click', function(event) {
+	button.addEventListener('submit', function(event) {
 		event.preventDefault()
-		postStakeAndRender(this.previousElementSibling)
+		const value = this.getElementsByTagName('input')[0].value
+		postStakeAndRender(value)
 	});
 
 	button = document.getElementById('add_pool');
-	button.addEventListener('click', function(event) {
+	button.addEventListener('submit', function(event) {
 		event.preventDefault()
-		postFollowedPoolsAndRender(this.previousElementSibling)
+		const value = this.getElementsByTagName('input')[0].value
+		postFollowedPoolsAndRender(value)
 	});
 
 	button = document.getElementById('prev');

@@ -74,8 +74,8 @@ function getActiveStakes() {
 }
 
 
-function postFollowedPool(ticker_field) {
-	const ticker = ticker_field.value;
+function postFollowedPool(value) {
+	const ticker = value;
 	const token = session.token;
 	return fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
     method:'POST',
@@ -94,8 +94,8 @@ function postFollowedPool(ticker_field) {
 }
 
 
-function postStake(addr_field) {
-	const stake_addr = addr_field.value;
+function postStake(value) {
+	const stake_addr = value;
 	const token = session.token;
 	return fetch(`${BACKEND_URL}/users/${session.user_id}/stakes`,{
     method:'POST',
