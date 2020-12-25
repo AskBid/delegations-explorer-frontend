@@ -21,11 +21,16 @@ function renderTabs(activeStakes, followedPools) {
 		tab.mainSubTab.addLink(activeStake.pool.poolid);
 		followedPools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker, pool.id);
-			subTab.addLink(pool.poolid)
-			subTab.addValue('potential', activeStake.rewards * Math.random())
+			subTab.addLink(pool.poolid) 
+			subTab.addValue('potential', potentialReward(activeStake.amount, pool) )
 		});
 		tab.inject()
 	});
+}
+
+function potentialReward(delegation, pool) {
+	const ratio = pool.reward_ratio;
+	return delegation / ratio
 }
 
 
