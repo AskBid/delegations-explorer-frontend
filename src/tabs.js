@@ -1,8 +1,10 @@
 async function render() {
+	console.log('render start')
 	const activeStakes = await getActiveStakes();
 	const followedPools = await getFollowedPools();
 	emptyTabs();
 	renderTabs(activeStakes, followedPools);
+	console.log('render end.')
 }
 
 function emptyTabs() {
@@ -85,7 +87,7 @@ function postFollowedPool(value) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-    	pool: ticker
+    	ticker: ticker
     })
   }).then(resp=>resp.json())
   	.then(obj=> {
