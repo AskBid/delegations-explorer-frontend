@@ -144,7 +144,11 @@ class Tab extends String_to_html {
 	base_tab() {
   	const html_string = `
 			<div class='tab' id='${this.stake_id}'>
-			<div class='tab_title'>${this.stakeAddr.slice(0, 18)}...<div>
+				<div class='tab_title'>
+					<a class='stake_link' href='https://cardanoscan.io/stakekey/${this.stakeAddr}' target='_blank'>
+						${this.stakeAddr.slice(0, 23)}...
+					</a>
+				<div>
 			</div>`;
 		return super.buildHTML(html_string)
 	};
@@ -221,7 +225,6 @@ class SubTab extends String_to_html {
 	addValue(label, value) {
 		const row = new ValueRow(label, value).build_row()
 		const div = this.tab.getElementsByClassName('tab_values')[0]
-		// debugger
 		div.appendChild(row)
 	}
 };

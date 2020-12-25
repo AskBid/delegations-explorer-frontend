@@ -246,6 +246,17 @@ main > .container > .container {
   top: -10px;  */
 }
 
+a.stake_link {
+	text-decoration: none;
+	font-weight: 700;
+	color: rgba(250,250,250,1);
+}
+a:hover.stake_link {
+	text-decoration: none;
+	font-weight: bold;
+	color: rgba(240,50,50,0.9);
+}
+
 .pool_ticker {
 	display: inline;
 	font-weight: bold;
