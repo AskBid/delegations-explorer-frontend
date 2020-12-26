@@ -17,27 +17,35 @@ document.addEventListener("DOMContentLoaded", () => {
 	button = document.getElementById('add_stake');
 	button.addEventListener('submit', function(event) {
 		event.preventDefault()
-		const value = this.getElementsByTagName('input')[0].value
-		postStakeAndRender(value)
+		if (session) {
+			const value = this.getElementsByTagName('input')[0].value;
+			postStakeAndRender(value);
+		} else {
+			inviteToLogin()
+		}
 	});
 
 	button = document.getElementById('add_pool');
 	button.addEventListener('submit', function(event) {
-		event.preventDefault()
-		const value = this.getElementsByTagName('input')[0].value
-		postFollowedPoolsAndRender(value)
+		event.preventDefault();
+		if (session) {
+			const value = this.getElementsByTagName('input')[0].value;
+			postFollowedPoolsAndRender(value);
+		} else {
+			inviteToLogin()
+		}
 	});
 
 	button = document.getElementById('prev');
 	button.addEventListener('click', function(event) {
-		event.preventDefault()
-		changeEpoch(this)
+		event.preventDefault();
+		changeEpoch(this);
 	});
 
 	button = document.getElementById('next');
 	button.addEventListener('click', function(event) {
-		event.preventDefault()
-		changeEpoch(this)
+		event.preventDefault();
+		changeEpoch(this);
 	});
 
 	(async ()=> {
@@ -45,7 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		autocomplete(document.getElementById("insert_pool"), tickers);
 		await fetchEpochInfo();
 		await restoreSession();
-		render()
+		if (session) {
+			render()
+		}
 	})()
 });
 
