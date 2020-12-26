@@ -1,14 +1,16 @@
 async function render() {
-	console.log('render start')
 	if (session) {
 		const activeStakes = await getActiveStakes();
 		const followedPools = await getFollowedPools();
 		emptyTabs();
-		renderTabs(activeStakes, followedPools);
+		if (activeStakes === undefined || activeStakes.length == 0) {
+			renderInstruction()
+		} else {
+			renderTabs(activeStakes, followedPools);
+		}
 	} else {
 		renderInstruction()
 	}
-	console.log('render end.')
 }
 
 function emptyTabs() {
