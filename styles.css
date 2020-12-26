@@ -219,7 +219,7 @@ main > .container > .container {
 	background-color: white;
 	margin: 0px 5px 5px 5px;
 	padding: 5px 5px 5px 5px;
-	width: 270px;
+	width: 285px;
 	border: 1px solid;
 	border-radius: 7px;
 	display: flex;
@@ -254,7 +254,7 @@ a.stake_link {
 a:hover.stake_link {
 	text-decoration: none;
 	font-weight: bold;
-	color: rgba(240,50,50,0.9);
+	color: rgba(255, 153, 0,0.9);
 }
 
 .pool_ticker {
@@ -324,12 +324,11 @@ a:hover, .sub_tab + .sub_tab .pool_ticker > a:hover {
 
 .tab_pool_values {
 	text-align: left;
-	flex:1 0 58px;
+	flex:1 1 58px;
 }
 
 .tab_values {
-
-	flex:5;
+	flex:6;
 }
 
 .row {
@@ -341,18 +340,19 @@ a:hover, .sub_tab + .sub_tab .pool_ticker > a:hover {
 }
 
 .tab_value {
-	padding: 2px 0px;
-	flex:1;
+	padding: 2px 3px 2px 2px;
+	flex:1 0 80px;
 	text-align: right;
 	border-radius: 3px;
 	background-color: rgba(150,150,150,0.1);
 	font-family: 'Roboto Mono';
+	font-size: 0.96em;
 }
 
 .tab_label {
 	margin: 2px 5px;
 	color: #777;
-	flex:1;
+	flex:1 0 50px;
 	text-align: right;
 	vertical-align: middle;
 }

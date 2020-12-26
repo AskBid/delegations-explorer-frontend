@@ -22,15 +22,10 @@ function renderTabs(activeStakes, followedPools) {
 		followedPools.forEach((pool)=> {
 			const subTab = tab.add_sub_tab(pool.ticker, pool.id);
 			subTab.addLink(pool.poolid) 
-			subTab.addValue('potential', potentialReward(activeStake.amount, pool) )
+			subTab.addValue('potential', parseInt(activeStake.amount / pool.reward_ratio) )
 		});
 		tab.inject()
 	});
-}
-
-function potentialReward(delegation, pool) {
-	const ratio = pool.reward_ratio;
-	return delegation / ratio
 }
 
 
@@ -217,11 +212,6 @@ class SubTab extends String_to_html {
 		return subTab
 	};
 
-	// set ticker(ticker) {
-	// 	const div = this.tab.getElementsByClassName('pool_ticker')[0]
-	// 	div.innerHTML = ticker
-	// }
-
 	addValue(label, value) {
 		const row = new ValueRow(label, value).build_row()
 		const div = this.tab.getElementsByClassName('tab_values')[0]
@@ -242,7 +232,7 @@ class ValueRow extends String_to_html {
 	formatted_value() {
 		if (this.symbol === '₳'){
 			const value = this.value / 1000000;
-			return parseInt(value)
+			return numeral(parseInt(value)).format('0,0')
 		} else { return this.value }
 	}
 
