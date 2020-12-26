@@ -145,6 +145,16 @@ main > .container > .container {
 	justify-content: center;
 }
 
+.instructions_title {
+	font-weight: 700;
+	color: rgba(20,20,20,0.9);
+}
+
+.instructions {
+	font-weight: 500;
+	color: rgba(120,120,120,0.8);
+}
+
 
 .chart_container {
 	/*background-color: rgba(150,150,150,0.11);*/
@@ -445,7 +455,7 @@ button[disabled]{
 	min-height:40px;
 	flex-direction: column; 
 	justify-content: center;
-	margin: 0px 0px 0px 10px;
+	margin: 0px 7px 0px 10px;
 }
 
 #login_form {

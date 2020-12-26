@@ -7,6 +7,7 @@
   display: inline-block;
   flex: 1;
 }
+
 input {
   width: 100%;
   border: 1px solid transparent;
@@ -14,6 +15,11 @@ input {
   padding: 3px 0px 3px 5px;
   font-size: 15px;
   box-sizing: content-box;
+}
+
+#login_fields > input {
+  box-sizing: border-box;
+  margin: 3px;
 }
 
 .autocomplete-items {
