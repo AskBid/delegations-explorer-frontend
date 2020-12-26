@@ -55,9 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		await restoreSession();
 		if (session) {
 			render()
+		} else {
+			renderInstruction()
 		}
 	})()
 });
+
+function inviteToLogin() {
+	// debugger
+	if (document.getElementById('login_form').style.backgroundColor === "rgba(255, 149, 0, 0.9)" || "") {
+		document.getElementById('login_form').style.backgroundColor = "rgba(10, 255, 190,0.9)";
+	} else {
+		document.getElementById('login_form').style.backgroundColor = "rgba(255, 149, 0, 0.9)"
+	}
+}
 
 function getPools() {
 	return fetch(`${BACKEND_URL}/pools`, {
@@ -77,6 +88,7 @@ function login() {
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
 	const user = new User(username, password);
+	document.getElementById('login_form').style = "";
 	user.post()
 }
 
@@ -101,6 +113,7 @@ class User {
 	  	if (obj.token) {
 				session = new Session(obj.username, obj.id, obj.token)
 				session.save()
+				render()
 			}
 			else {
 				displayLoginError(obj);
@@ -122,8 +135,10 @@ class Session {
 	}
 
 	logout() {
-		delete localStorage.token
-		this.switchLoginLogout()
+		delete localStorage.token;
+		session = undefined;
+		this.switchLoginLogout();
+		render();
 	}
 
 	switchLoginLogout() {

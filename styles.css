@@ -414,6 +414,10 @@ button[disabled]{
 	width: 60px;
 }
 
+#login, .button {
+	margin: 0px 0px 0px 5px;
+}
+
 #logout {
 	display: none;
 }
@@ -455,12 +459,14 @@ button[disabled]{
 	min-height:40px;
 	flex-direction: column; 
 	justify-content: center;
-	margin: 0px 7px 0px 10px;
+	margin: 0px 7px 0px 0px;
+	box-sizing: border-box;
 }
 
 #login_form {
 	display: flex;
 	flex-direction: row;
+	border-radius: 4px;
 }
 
 .button_small {
