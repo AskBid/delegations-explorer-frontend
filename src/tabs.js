@@ -47,7 +47,7 @@ async function postFollowedPoolsAndRender(ticker_field) {
 
 function getFollowedPools() {
 	const token = session.token
-	return fetch(`${BACKEND_URL}/users/${session.user_id}/pools`,{
+	return fetch(`${BACKEND_URL}/users/${session.user_id}/pools?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
