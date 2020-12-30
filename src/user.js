@@ -21,7 +21,7 @@ class User {
 	}
 
 	post() {
-		fetch(`${BACKEND_URL}/users`,{
+		fetch(`${AppStorage.BACKEND_URL()}/users`,{
 	    method:'POST',
 	    headers: {
 	      "Content-Type":"application/json",

@@ -74,7 +74,7 @@ function login() {
 function restoreSession() {
 	const token = localStorage.token
 	if (token) {
-		return fetch(`${BACKEND_URL}/login`,{
+		return fetch(`${AppStorage.BACKEND_URL()}/login`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
@@ -92,7 +92,7 @@ function restoreSession() {
 
 
 function getPools() {
-	return fetch(`${BACKEND_URL}/pools`, {
+	return fetch(`${AppStorage.BACKEND_URL()}/pools`, {
 		method:'GET',
 	  headers: {
       "Content-Type":"application/json",
