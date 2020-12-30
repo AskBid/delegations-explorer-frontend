@@ -1,6 +1,3 @@
-// const BACKEND_URL = "http://localhost:3000";
-// let session;
-
 document.addEventListener("DOMContentLoaded", () => {
 	let button = document.getElementById('login_form');
 	button.addEventListener('submit', function(event) {
@@ -107,7 +104,6 @@ function getPools() {
 
 
 function inviteToLogin() {
-	// debugger
 	if (document.getElementById('login_form').style.backgroundColor === "rgba(255, 149, 0, 0.9)" || "") {
 		document.getElementById('login_form').style.backgroundColor = "rgba(10, 255, 190,0.9)";
 	} else {

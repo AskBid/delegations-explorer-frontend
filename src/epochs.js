@@ -1,5 +1,3 @@
-let epoch = null
-
 class Epoch {
 	constructor(min, max, current) {
 		this.min = min;
@@ -23,7 +21,7 @@ function fetchEpochInfo() {
   })
   .then(resp=>resp.json())
   .then(obj=> {
-  	epoch = new Epoch(obj.min, obj.max, obj.max);
+  	AppStorage.epoch = new Epoch(obj.min, obj.max, obj.max);
   	displayEpoch()
   	checkEpochButtonState()
   })
@@ -31,27 +29,27 @@ function fetchEpochInfo() {
 
 function changeEpoch(element) {
 	let move = element.id === 'next' ? 1 : -1
-	epoch.move(move);
+	AppStorage.epoch.move(move);
 	displayEpoch();
 	checkEpochButtonState();
 	render();
 }
 
 function displayEpoch() {
-	if (epoch) {
-		document.getElementById('epoch').innerHTML = `epoch ${epoch.current}`;
+	if (AppStorage.epoch) {
+		document.getElementById('epoch').innerHTML = `epoch ${AppStorage.epoch.current}`;
 	} else {
 		document.getElementById('epoch').innerHTML = `null epoch!`;
 	}
 }
 
 function checkEpochButtonState() {
-	if (epoch.current === epoch.max) {
+	if (AppStorage.epoch.current === AppStorage.epoch.max) {
 			document.getElementById("next").disabled = true;
 	} else {
 			document.getElementById("next").disabled = false;
 	}
-	if (epoch.current === epoch.min) {
+	if (AppStorage.epoch.current === AppStorage.epoch.min) {
 		document.getElementById("prev").disabled = true;
 	} else {
 		document.getElementById("prev").disabled = false;
