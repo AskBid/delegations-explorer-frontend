@@ -1,5 +1,5 @@
 async function render() {
-	if (session) {
+	if (AppStorage.session) {
 		const activeStakes = await getActiveStakes();
 		const followedPools = await getFollowedPools();
 		emptyTabs();
@@ -46,8 +46,8 @@ async function postFollowedPoolsAndRender(ticker_field) {
 }
 
 function getFollowedPools() {
-	const token = session.token
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${session.user_id}/pools?epochno=${epoch.current}`,{
+	const token = AppStorage.session.token
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/pools?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
@@ -64,8 +64,8 @@ function getFollowedPools() {
 }
 
 function getActiveStakes() {
-	const token = session.token
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${session.user_id}/active_stake?epochno=${epoch.current}`,{
+	const token = AppStorage.session.token
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/active_stake?epochno=${epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
@@ -84,8 +84,8 @@ function getActiveStakes() {
 
 function postFollowedPool(value) {
 	const ticker = value;
-	const token = session.token;
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${session.user_id}/pools`,{
+	const token = AppStorage.session.token;
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/pools`,{
     method:'POST',
     headers: {
     	"Authorization": `${token}`,
@@ -104,8 +104,8 @@ function postFollowedPool(value) {
 
 function postStake(value) {
 	const stake_addr = value;
-	const token = session.token;
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${session.user_id}/stakes`,{
+	const token = AppStorage.session.token;
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/stakes`,{
     method:'POST',
     headers: {
     	"Authorization": `${token}`,
@@ -200,10 +200,10 @@ class SubTab extends String_to_html {
 		const form = subTab.getElementsByClassName('delete')[0];
 		form.addEventListener('submit', function(event) {
 			event.preventDefault();
-			fetch(`${AppStorage.BACKEND_URL()}/users/${session.user_id}/${this.type.value}/${this.id.value}`,{
+			fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/${this.type.value}/${this.id.value}`,{
 				method:'DELETE',
 				headers: {
-					"Authorization":session.token,
+					"Authorization":AppStorage.session.token,
 		      "Content-Type":"application/json",
 		      "Accept": "application/json"
 		    }

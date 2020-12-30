@@ -1,5 +1,5 @@
-const BACKEND_URL = "http://localhost:3000";
-let session;
+// const BACKEND_URL = "http://localhost:3000";
+// let session;
 
 document.addEventListener("DOMContentLoaded", () => {
 	let button = document.getElementById('login_form');
@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	button = document.getElementById('logout');
 	button.addEventListener('click', function(event) {
 		event.preventDefault()
-		if (session) {session.logout()}
+		if (AppStorage.session) {AppStorage.session.logout()}
 	});
 
 	button = document.getElementById('add_stake');
 	button.addEventListener('submit', function(event) {
 		event.preventDefault()
-		if (session) {
+		if (AppStorage.session) {
 			const value = this.getElementsByTagName('input')[0].value;
 			postStakeAndRender(value);
 		} else {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	button = document.getElementById('add_pool');
 	button.addEventListener('submit', function(event) {
 		event.preventDefault();
-		if (session) {
+		if (AppStorage.session) {
 			const value = this.getElementsByTagName('input')[0].value;
 			postFollowedPoolsAndRender(value);
 		} else {
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		autocomplete(document.getElementById("insert_pool"), tickers);
 		await fetchEpochInfo();
 		await restoreSession();
-		if (session) {
+		if (AppStorage.session) {
 			render()
 		} else {
 			renderInstruction()
@@ -84,8 +84,8 @@ function restoreSession() {
 	  })
 	  .then(resp=>resp.json())
 	  .then(obj=> {
-	  	session = new Session(obj.username, obj.id, token);
-	  	session.save()
+	  	AppStorage.session = new Session(obj.username, obj.id, token);
+	  	AppStorage.session.save()
 	  })
 	}
 }

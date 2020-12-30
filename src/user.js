@@ -1,15 +1,8 @@
 class AppStorage {
 	static BACKEND_URL() {
-    return "http://52.56.73.140:3003"
+    // return "http://52.56.73.140:3003"
+    return "http://127.0.0.1:3000"
   };
-
-  static setSession(session) {
-  	this.session = session
-  }
-
-  static getSession(session) {
-  	return this.session
-  }
 }
 
 
@@ -33,8 +26,8 @@ class User {
 	  .then(obj=> {
 	  	console.log(obj);
 	  	if (obj.token) {
-				session = new Session(obj.username, obj.id, obj.token)
-				session.save()
+				AppStorage.session = new Session(obj.username, obj.id, obj.token)
+				AppStorage.session.save()
 				render()
 			}
 			else {
@@ -58,7 +51,7 @@ class Session {
 
 	logout() {
 		delete localStorage.token;
-		session = undefined;
+		AppStorage.session = undefined;
 		this.switchLoginLogout();
 		render();
 	}
