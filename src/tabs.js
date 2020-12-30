@@ -256,6 +256,12 @@ function renderInstruction(){
 	document.getElementById('tabs_target').innerHTML = `
 	<div class='tab' id='instructions' style='padding:0px 20px 0px 0px'>
     <ol>
+        <span class='instructions'>
+        NO active <b>delegations</b> where detected.<br>
+        Your stake address wasn't delegated or:
+        </span>
+        <br>
+        <br>
         <li>
             <span class='instructions_title'>Submit a Username.</span>
             <br>
