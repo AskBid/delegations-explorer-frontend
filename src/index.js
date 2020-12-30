@@ -61,28 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	})()
 });
 
-function inviteToLogin() {
-	// debugger
-	if (document.getElementById('login_form').style.backgroundColor === "rgba(255, 149, 0, 0.9)" || "") {
-		document.getElementById('login_form').style.backgroundColor = "rgba(10, 255, 190,0.9)";
-	} else {
-		document.getElementById('login_form').style.backgroundColor = "rgba(255, 149, 0, 0.9)"
-	}
-}
-
-function getPools() {
-	return fetch(`${BACKEND_URL}/pools`, {
-		method:'GET',
-	  headers: {
-      "Content-Type":"application/json",
-      "Accept": "application/json"
-    }
-	}).then(resp=>resp.json())
-	  .then(obj=> {
-	  	const tickers = obj.map(obj=>obj.ticker)
-	  	return tickers
-	  })
-}
 
 function login() {
 	const username = document.getElementById('username').value;
@@ -92,82 +70,6 @@ function login() {
 	user.post()
 }
 
-class User {
-	constructor(username, password){
-		this.username = username;
-		this.password = password;
-	}
-
-	post() {
-		fetch(`${BACKEND_URL}/users`,{
-	    method:'POST',
-	    headers: {
-	      "Content-Type":"application/json",
-	      "Accept": "application/json"
-	    },
-	    body: JSON.stringify(this)
-	  })
-	  .then(resp=>resp.json())
-	  .then(obj=> {
-	  	console.log(obj);
-	  	if (obj.token) {
-				session = new Session(obj.username, obj.id, obj.token)
-				session.save()
-				render()
-			}
-			else {
-				displayLoginError(obj);
-			}
-	  })
-	}
-}
-
-class Session {
-	constructor(username, user_id, token){
-		this.username = username;
-		this.user_id = user_id;
-		this.token = token;
-	}
-
-	save() {
-		localStorage.token = this.token
-		this.switchLoginLogout()
-	}
-
-	logout() {
-		delete localStorage.token;
-		session = undefined;
-		this.switchLoginLogout();
-		render();
-	}
-
-	switchLoginLogout() {
-		const form = document.getElementById('login_form');
-		const logout = document.getElementById('logout');
-		const username_label = document.getElementById('username_label');
-		if (form.style.display == '') {
-			form.style.display = 'none';
-			logout.style.display = 'block';
-			username_label.innerHTML = `@<b>${this.username}</b>`;
-			username_label.style.display = 'block';
-		} else {
-			form.style.display = '';
-			logout.style.display = 'none';
-			username_label.style.display = 'none';
-		}
-	}
-}
-
-function displayLoginError(obj) {
-	if (obj.errors.password) {
-		document.getElementById('password').value = '';
-		document.getElementById('password').placeholder = obj.errors.password;
-	} 
-	if (obj.errors.username) {
-		document.getElementById('username').value = '';
-		document.getElementById('username').placeholder = obj.errors.username;
-	}
-}
 
 function restoreSession() {
 	const token = localStorage.token
@@ -185,5 +87,42 @@ function restoreSession() {
 	  	session = new Session(obj.username, obj.id, token);
 	  	session.save()
 	  })
+	}
+}
+
+
+function getPools() {
+	return fetch(`${BACKEND_URL}/pools`, {
+		method:'GET',
+	  headers: {
+      "Content-Type":"application/json",
+      "Accept": "application/json"
+    }
+	}).then(resp=>resp.json())
+	  .then(obj=> {
+	  	const tickers = obj.map(obj=>obj.ticker)
+	  	return tickers
+	  })
+}
+
+
+function inviteToLogin() {
+	// debugger
+	if (document.getElementById('login_form').style.backgroundColor === "rgba(255, 149, 0, 0.9)" || "") {
+		document.getElementById('login_form').style.backgroundColor = "rgba(10, 255, 190,0.9)";
+	} else {
+		document.getElementById('login_form').style.backgroundColor = "rgba(255, 149, 0, 0.9)"
+	}
+}
+
+
+function displayLoginError(obj) {
+	if (obj.errors.password) {
+		document.getElementById('password').value = '';
+		document.getElementById('password').placeholder = obj.errors.password;
+	} 
+	if (obj.errors.username) {
+		document.getElementById('username').value = '';
+		document.getElementById('username').placeholder = obj.errors.username;
 	}
 }
