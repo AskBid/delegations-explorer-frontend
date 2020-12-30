@@ -47,7 +47,7 @@ async function postFollowedPoolsAndRender(ticker_field) {
 
 function getFollowedPools() {
 	const token = AppStorage.session.token
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/pools?epochno=${epoch.current}`,{
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/pools?epochno=${AppStorage.epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
@@ -65,7 +65,7 @@ function getFollowedPools() {
 
 function getActiveStakes() {
 	const token = AppStorage.session.token
-	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/active_stake?epochno=${epoch.current}`,{
+	return fetch(`${AppStorage.BACKEND_URL()}/users/${AppStorage.session.user_id}/active_stake?epochno=${AppStorage.epoch.current}`,{
 	    method:'GET',
 	    headers: {
 	 			"Authorization": `${token}`,
